@@ -22,7 +22,7 @@ export const Scanner: React.FC = () => {
     setShowScanner(false);
   };
 
-  const { startScanning, isScanning, error, hasPermission, requestPermission } =
+  const { startScanning, error, hasPermission, requestPermission } =
     useCamera(handleScan, {
       fps: 30,
       qrbox: 250,
@@ -64,7 +64,6 @@ export const Scanner: React.FC = () => {
       {showScanner && (
         <div className="mb-8">
           <QRScanner
-            isScanning={isScanning}
             error={error}
             hasPermission={hasPermission}
             startScanning={startScanning}

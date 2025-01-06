@@ -8,11 +8,10 @@ interface UseCameraOptions {
 }
 
 interface UseCameraResult {
+  error: string | null;
+  hasPermission: boolean | null;
   startScanning: () => Promise<void>;
   stopScanning: () => Promise<void>;
-  isScanning: boolean;
-  error: string | null;
-  hasPermission: boolean;
   requestPermission: () => Promise<void>;
 }
 
@@ -21,24 +20,20 @@ export const useCamera = (
   options: UseCameraOptions = {}
 ): UseCameraResult => {
   const [scanner, setScanner] = useState<Html5Qrcode | null>(null);
-  const [isScanning, setIsScanning] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [hasPermission, setHasPermission] = useState(false);
+  const [hasPermission, setHasPermission] = useState<boolean | null>(null);
 
   const cleanup = useCallback(async () => {
     if (scanner) {
       try {
-        if (isScanning) {
-          await scanner.stop();
-        }
+        await scanner.stop();
         await scanner.clear();
       } catch (err) {
         // Ignore cleanup errors
       }
       setScanner(null);
-      setIsScanning(false);
     }
-  }, [scanner, isScanning]);
+  }, [scanner]);
 
   useEffect(() => {
     cleanup();
@@ -73,7 +68,6 @@ export const useCamera = (
   }, []);
 
   const startScanning = async () => {
-    setIsScanning(true);
     try {
       // Check if the browser supports getUserMedia
       if (!navigator.mediaDevices?.getUserMedia) {
@@ -110,7 +104,6 @@ export const useCamera = (
         (decodedText) => {
           onScan(decodedText);
           newScanner.stop()
-          setIsScanning(false);
           setScanner(null);
         },
         (errorMessage) => {
@@ -129,10 +122,13 @@ export const useCamera = (
         console.log(err)
         setError('Failed to start camera. Please try again.');
       }
+    } finally {
+      if (scanner) {
+        scanner.stop()
+        setScanner(null)
+      }
     }
   };
-
-  console.log({hasPermission})
 
   const stopScanning = async () => {
     await cleanup();
@@ -141,7 +137,6 @@ export const useCamera = (
   return {
     startScanning,
     stopScanning,
-    isScanning,
     error,
     hasPermission,
     requestPermission,
