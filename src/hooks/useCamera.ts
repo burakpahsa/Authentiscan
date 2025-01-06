@@ -8,11 +8,10 @@ interface UseCameraOptions {
 }
 
 interface UseCameraResult {
+  error: string | null;
+  hasPermission: boolean | null;
   startScanning: () => Promise<void>;
   stopScanning: () => Promise<void>;
-  isScanning: boolean;
-  error: string | null;
-  hasPermission: boolean;
   requestPermission: () => Promise<void>;
 }
 
@@ -21,34 +20,29 @@ export const useCamera = (
   options: UseCameraOptions = {}
 ): UseCameraResult => {
   const [scanner, setScanner] = useState<Html5Qrcode | null>(null);
-  const [isScanning, setIsScanning] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [hasPermission, setHasPermission] = useState(false);
+  const [hasPermission, setHasPermission] = useState<boolean | null>(null);
 
   const cleanup = useCallback(async () => {
     if (scanner) {
       try {
-        if (isScanning) {
-          await scanner.stop();
-        }
+        await scanner.stop();
         await scanner.clear();
       } catch (err) {
         // Ignore cleanup errors
       }
       setScanner(null);
-      setIsScanning(false);
+
     }
-  }, [scanner, isScanning]);
+  }, [scanner]);
 
   useEffect(() => {
-    return () => {
-      cleanup();
-    };
-  }, [cleanup]);
+    cleanup();
+    }, []);
 
   const requestPermission = useCallback(async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ 
+      const stream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: 'environment' }
       });
       stream.getTracks().forEach(track => track.stop());
@@ -76,21 +70,30 @@ export const useCamera = (
 
   const startScanning = async () => {
     try {
-      await cleanup();
+      // Check if the browser supports getUserMedia
+      if (!navigator.mediaDevices?.getUserMedia) {
+        throw new Error('Camera access is not supported in this browser.');
+      }
+
 
       const newScanner = new Html5Qrcode('qr-reader');
       setScanner(newScanner);
 
+      // Get list of cameras before starting
       const cameras = await Html5Qrcode.getCameras();
       if (cameras.length === 0) {
-        throw new Error('No cameras found');
+        throw new Error('No cameras found on this device.');
       }
-
-      // Prefer back camera
-      const camera = cameras.find(c => 
-        c.label.toLowerCase().includes('back') || 
+      // Try to find the back camera first
+      const camera = cameras.find(c =>
+        c.label.toLowerCase().includes('back') ||
         c.label.toLowerCase().includes('rear')
       ) || cameras[0];
+
+      // Request camera permissions explicitly before starting
+      await navigator.mediaDevices.getUserMedia({
+        video: { deviceId: camera.id }
+      });
 
       await newScanner.start(
         camera.id,
@@ -98,18 +101,34 @@ export const useCamera = (
           fps: options.fps || 10,
           qrbox: { width: options.qrbox || 250, height: options.qrbox || 250 },
           aspectRatio: options.aspectRatio || 1.0,
+          formatsToSupport: ['QR_CODE'],
         },
         (decodedText) => {
           onScan(decodedText);
+          newScanner.stop()
+          setScanner(null);
         },
-        () => {} // Ignore errors during scanning
+        (errorMessage) => {
+          console.debug('QR Scan error:', errorMessage);
+        }
       );
 
-      setIsScanning(true);
-      setError(null);
+      if (error) {
+        setError(null);
+      }
     } catch (err) {
       await cleanup();
-      setError('Failed to start camera. Please try again.');
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        console.log(err)
+        setError('Failed to start camera. Please try again.');
+      }
+    } finally {
+      if (scanner) {
+        scanner.stop()
+        setScanner(null)
+      }
     }
   };
 
@@ -120,7 +139,6 @@ export const useCamera = (
   return {
     startScanning,
     stopScanning,
-    isScanning,
     error,
     hasPermission,
     requestPermission,
