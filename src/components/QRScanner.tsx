@@ -5,17 +5,22 @@ import { ErrorMessage } from "./ErrorMessage";
 import { ScannerOverlay } from "./Scanner/ScannerOverlay";
 
 interface QRScannerProps {
-  onScan: (qrCode: string) => void;
+  // onScan: (qrCode: string) => void;
   onError?: (error: string) => void;
+  startScanning: () => Promise<void>;
+  isScanning: boolean;
+  error: string | null;
+  hasPermission: boolean;
+  requestPermission: () => Promise<void>;
 }
 
-export const QRScanner: React.FC<QRScannerProps> = ({ onScan, onError }) => {
-  const { startScanning, isScanning, error, hasPermission, requestPermission } =
-    useCamera(onScan, {
-      fps: 30,
-      qrbox: 250,
-      aspectRatio: 1.0,
-    });
+export const QRScanner: React.FC<QRScannerProps> = ({ isScanning, error, hasPermission, startScanning, requestPermission, onError }) => {
+  // const { startScanning, isScanning, error, hasPermission, requestPermission } =
+  //   useCamera(onScan, {
+  //     fps: 30,
+  //     qrbox: 250,
+  //     aspectRatio: 1.0,
+  //   });
 
   useEffect(() => {
     if (!isScanning && hasPermission) {
@@ -57,7 +62,6 @@ export const QRScanner: React.FC<QRScannerProps> = ({ onScan, onError }) => {
         <CameraPermission onRequestPermission={requestPermission} />
       ) : (
         <div className="relative">
-          {isScanning && (
             <>
               <div
                 id="qr-reader"
@@ -65,7 +69,6 @@ export const QRScanner: React.FC<QRScannerProps> = ({ onScan, onError }) => {
               />
               <ScannerOverlay />
             </>
-          )}
         </div>
       )}
     </div>

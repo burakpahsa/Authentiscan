@@ -126,10 +126,13 @@ export const useCamera = (
       if (err instanceof Error) {
         setError(err.message);
       } else {
+        console.log(err)
         setError('Failed to start camera. Please try again.');
       }
     }
   };
+
+  console.log({hasPermission})
 
   const stopScanning = async () => {
     await cleanup();

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { useAuthStore } from '../store/authStore';
-import { ScanResult } from '../types';
-import { CheckCircle, XCircle, Camera, RefreshCw } from 'lucide-react';
-import { QRScanner } from './QRScanner';
+import React, { useState } from "react";
+import { useAuthStore } from "../store/authStore";
+import { ScanResult } from "../types";
+import { CheckCircle, XCircle, Camera, RefreshCw } from "lucide-react";
+import { QRScanner } from "./QRScanner";
+import { useCamera } from "../hooks/useCamera";
 
 export const Scanner: React.FC = () => {
   const [result, setResult] = useState<ScanResult | null>(null);
@@ -14,12 +15,19 @@ export const Scanner: React.FC = () => {
     setResult({
       isAuthentic: !!product,
       product,
-      message: product 
-        ? 'Product authenticated successfully!' 
-        : 'Warning: This product could not be verified.',
+      message: product
+        ? "Product authenticated successfully!"
+        : "Warning: This product could not be verified.",
     });
     setShowScanner(false);
   };
+
+  const { startScanning, isScanning, error, hasPermission, requestPermission } =
+    useCamera(handleScan, {
+      fps: 30,
+      qrbox: 250,
+      aspectRatio: 1.0,
+    });
 
   const handleStartScan = () => {
     setShowScanner(true);
@@ -38,7 +46,9 @@ export const Scanner: React.FC = () => {
           <Camera className="w-8 h-8 text-blue-600" />
         </div>
         <h1 className="text-2xl font-bold text-gray-900">Scan QR Code</h1>
-        <p className="text-gray-600 mt-2">Verify product authenticity by scanning its QR code</p>
+        <p className="text-gray-600 mt-2">
+          Verify product authenticity by scanning its QR code
+        </p>
       </div>
 
       {!showScanner && !result && (
@@ -53,39 +63,49 @@ export const Scanner: React.FC = () => {
 
       {showScanner && (
         <div className="mb-8">
-          <QRScanner onScan={handleScan} />
+          <QRScanner
+            isScanning={isScanning}
+            error={error}
+            hasPermission={hasPermission}
+            startScanning={startScanning}
+            requestPermission={requestPermission}
+          />
         </div>
       )}
 
       {result && (
-        <div className={`p-6 rounded-lg shadow-lg ${
-          result.isAuthentic ? 'bg-green-50' : 'bg-red-50'
-        }`}>
+        <div
+          className={`p-6 rounded-lg shadow-lg ${
+            result.isAuthentic ? "bg-green-50" : "bg-red-50"
+          }`}
+        >
           <div className="flex items-center gap-3 mb-4">
             {result.isAuthentic ? (
               <CheckCircle className="w-8 h-8 text-green-500" />
             ) : (
               <XCircle className="w-8 h-8 text-red-500" />
             )}
-            <h2 className="text-xl font-semibold">
-              {result.message}
-            </h2>
+            <h2 className="text-xl font-semibold">{result.message}</h2>
           </div>
 
           {result.product && (
             <div className="mt-4">
               <div className="aspect-video rounded-lg overflow-hidden mb-4 shadow-md">
-                <img 
-                  src={result.product.imageUrl} 
+                <img
+                  src={result.product.imageUrl}
                   alt={result.product.name}
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-lg font-semibold mb-2">{result.product.name}</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {result.product.name}
+              </h3>
               <p className="text-gray-600 mb-4">{result.product.description}</p>
               <div className="grid grid-cols-2 gap-4 text-sm bg-white p-4 rounded-lg">
                 <div>
-                  <span className="font-medium text-gray-700">Manufacturer:</span>
+                  <span className="font-medium text-gray-700">
+                    Manufacturer:
+                  </span>
                   <p className="mt-1">{result.product.manufacturer}</p>
                 </div>
                 <div>
