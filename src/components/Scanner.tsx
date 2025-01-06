@@ -127,3 +127,4 @@ export const Scanner: React.FC = () => {
     </div>
   );
 };
+

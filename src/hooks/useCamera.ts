@@ -32,6 +32,7 @@ export const useCamera = (
         // Ignore cleanup errors
       }
       setScanner(null);
+
     }
   }, [scanner]);
 
@@ -73,6 +74,7 @@ export const useCamera = (
       if (!navigator.mediaDevices?.getUserMedia) {
         throw new Error('Camera access is not supported in this browser.');
       }
+
 
       const newScanner = new Html5Qrcode('qr-reader');
       setScanner(newScanner);

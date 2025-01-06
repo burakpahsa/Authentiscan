@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { CameraPermission } from "./CameraPermission";
 import { ErrorMessage } from "./ErrorMessage";
@@ -31,7 +32,6 @@ export const QRScanner: React.FC<QRScannerProps> = ({
   return (
     <div className="relative w-full">
       {error && <ErrorMessage message={error} />}
-
       {!hasPermission ? (
         <CameraPermission onRequestPermission={requestPermission} />
       ) : (
@@ -46,3 +46,4 @@ export const QRScanner: React.FC<QRScannerProps> = ({
     </div>
   );
 };
+
