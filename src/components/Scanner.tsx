@@ -6,6 +6,7 @@ import { QRScanner } from "./QRScanner";
 import { useCamera } from "../hooks/useCamera";
 
 export const Scanner: React.FC = () => {
+  const { fetchProducts } = useAuthStore();
   const [result, setResult] = useState<ScanResult | null>(null);
   const [showScanner, setShowScanner] = useState(false);
   const [ipAddress, setIpAddress] = useState<string>();
@@ -43,6 +44,10 @@ export const Scanner: React.FC = () => {
   };
 
   useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+
+  useEffect(() => {
     if (!ipAddress) {
       fetch("https://ipv4.icanhazip.com/")
         .then((response) => {
@@ -52,10 +57,13 @@ export const Scanner: React.FC = () => {
           return response.text();
         })
         .then((data) => {
-          setIpAddress(data)
+          setIpAddress(data);
         })
         .catch((error) => {
-          console.error("There was a problem with the IP fetch operation:", error);
+          console.error(
+            "There was a problem with the IP fetch operation:",
+            error
+          );
         });
     }
   }, []);
