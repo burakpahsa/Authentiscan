@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthStore } from "../store/authStore";
 import { ScanResult } from "../types";
 import { CheckCircle, XCircle, Camera, RefreshCw } from "lucide-react";
@@ -6,12 +6,14 @@ import { QRScanner } from "./QRScanner";
 import { useCamera } from "../hooks/useCamera";
 
 export const Scanner: React.FC = () => {
+  const { fetchProducts } = useAuthStore();
   const [result, setResult] = useState<ScanResult | null>(null);
   const [showScanner, setShowScanner] = useState(false);
+  const [ipAddress, setIpAddress] = useState<string>();
   const verifyProduct = useAuthStore((state) => state.verifyProduct);
 
   const handleScan = (data: string) => {
-    const product = verifyProduct(data);
+    const product = verifyProduct(data, ipAddress);
     setResult({
       isAuthentic: !!product,
       product,
@@ -22,12 +24,14 @@ export const Scanner: React.FC = () => {
     setShowScanner(false);
   };
 
-  const { startScanning, error, hasPermission, requestPermission } =
-    useCamera(handleScan, {
+  const { startScanning, error, hasPermission, requestPermission } = useCamera(
+    handleScan,
+    {
       fps: 30,
       qrbox: 250,
       aspectRatio: 1.0,
-    });
+    }
+  );
 
   const handleStartScan = () => {
     setShowScanner(true);
@@ -38,6 +42,31 @@ export const Scanner: React.FC = () => {
     setResult(null);
     setShowScanner(true);
   };
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+
+  useEffect(() => {
+    if (!ipAddress) {
+      fetch("https://ipv4.icanhazip.com/")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.text();
+        })
+        .then((data) => {
+          setIpAddress(data);
+        })
+        .catch((error) => {
+          console.error(
+            "There was a problem with the IP fetch operation:",
+            error
+          );
+        });
+    }
+  }, []);
 
   return (
     <div className="max-w-md mx-auto p-4">
@@ -127,4 +156,3 @@ export const Scanner: React.FC = () => {
     </div>
   );
 };
-

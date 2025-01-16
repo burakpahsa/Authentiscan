@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { CameraPermission } from "./CameraPermission";
 import { ErrorMessage } from "./ErrorMessage";
