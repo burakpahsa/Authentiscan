@@ -5,7 +5,7 @@ import { ErrorMessage } from "./ErrorMessage";
 import { ScannerOverlay } from "./Scanner/ScannerOverlay";
 
 interface QRScannerProps {
-  error: string | null;
+  error?: string | null;
   hasPermission: boolean | null;
   startScanning: () => Promise<void>;
   requestPermission: () => Promise<void>;
@@ -46,4 +46,3 @@ export const QRScanner: React.FC<QRScannerProps> = ({
     </div>
   );
 };
-

@@ -1,17 +1,28 @@
-import React from 'react';
-import { ScanIcon } from 'lucide-react';
-import { QRScanner } from './QRScanner';
+import React from "react";
+import { ScanIcon } from "lucide-react";
+import { QRScanner } from "./QRScanner";
 
 interface Props {
   onScan: (qrCode: string) => void;
   onClose: () => void;
+  error?: string | null;
+  hasPermission: boolean | null;
+  startScanning: () => Promise<void>;
+  requestPermission: () => Promise<void>;
 }
 
-export const AdminQRScanner: React.FC<Props> = ({ onScan, onClose }) => {
-  const handleScan = (data: string) => {
-    onScan(data);
-    onClose();
-  };
+export const AdminQRScanner: React.FC<Props> = ({
+  error,
+  hasPermission,
+  startScanning,
+  requestPermission,
+  onScan,
+  onClose,
+}) => {
+  // const handleScan = (data: string) => {
+  //   onScan(data);
+  //   onClose();
+  // };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -21,13 +32,18 @@ export const AdminQRScanner: React.FC<Props> = ({ onScan, onClose }) => {
             <ScanIcon className="w-6 h-6 text-blue-600" />
           </div>
           <h2 className="text-xl font-bold">Scan QR Code</h2>
-          <p className="text-gray-600 text-sm mt-1">Position the QR code within the frame</p>
+          <p className="text-gray-600 text-sm mt-1">
+            Position the QR code within the frame
+          </p>
         </div>
 
         <div className="mb-6">
           <QRScanner
-            containerId="admin-qr-reader"
-            onScan={handleScan}
+            // containerId="admin-qr-reader"
+            error={error}
+            hasPermission={hasPermission}
+            startScanning={startScanning}
+            requestPermission={requestPermission}
           />
         </div>
 
