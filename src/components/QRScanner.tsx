@@ -29,11 +29,7 @@ export const QRScanner: React.FC<QRScannerProps> = ({
         <CameraPermission onRequestPermission={requestPermission} />
       ) : (
         <div className="relative">
-          <div
-            id="qr-reader"
-            className="w-full rounded-lg overflow-hidden aspect-square bg-gray-100 [&_video]:w-full [&_video]:h-full [&_video]:object-cover [&_img]:hidden [&_select]:hidden [&_button]:hidden"
-          />
-          <ScannerOverlay onScan={onScan}/>
+          <ScannerOverlay onScan={onScan} />
         </div>
       )}
     </div>
