@@ -20,10 +20,8 @@ export const ScannerOverlay: React.FC<ScannerOverlayProps> = ({
           <BarcodeScannerComponent
             onUpdate={(_err, result) => {
               if (result) {
-                console.log(result.getText())
                 onScan(result.getText())
               }
-              // if (err) console.log("Error: ", err);
             }}
             delay={300}
           />

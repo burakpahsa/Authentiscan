@@ -93,12 +93,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
   },
 
   verifyProduct: (qrCode: string, ipAddress?: string) => {
-    // logRequest(qrCode, ipAddress)
-    console.log(`Entered QR: *${qrCode}*`)
-    get().authenticProducts.forEach((p) => {
-      console.log(`*${p.qrCode}*`)
-      console.log("is equal?: ", p.qrCode === qrCode)
-    })
+    logRequest(qrCode, ipAddress)
     return get().authenticProducts.find((p) => p.qrCode === qrCode)
   },
 }));
