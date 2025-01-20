@@ -13,7 +13,9 @@ export const Scanner: React.FC = () => {
   const verifyProduct = useAuthStore((state) => state.verifyProduct);
 
   const handleScan = (data: string) => {
+    console.log("data: ", data)
     const product = verifyProduct(data, ipAddress);
+    console.log({product})
     setResult({
       isAuthentic: !!product,
       product,
@@ -97,6 +99,7 @@ export const Scanner: React.FC = () => {
             hasPermission={hasPermission}
             startScanning={startScanning}
             requestPermission={requestPermission}
+            onScan={handleScan}
           />
         </div>
       )}

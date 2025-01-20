@@ -44,6 +44,7 @@ export const AdminQRScanner: React.FC<Props> = ({
             hasPermission={hasPermission}
             startScanning={startScanning}
             requestPermission={requestPermission}
+            onScan={onScan}
           />
         </div>
 

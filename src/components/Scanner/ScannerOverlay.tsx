@@ -1,7 +1,14 @@
-import React from 'react';
-import { Camera } from 'lucide-react';
+import React from "react";
+import { Camera } from "lucide-react";
+import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
-export const ScannerOverlay: React.FC = () => {
+type ScannerOverlayProps = {
+  onScan: (data: string) => void;
+};
+
+export const ScannerOverlay: React.FC<ScannerOverlayProps> = ({
+  onScan,
+}) => {
   return (
     <div className="absolute inset-0 pointer-events-none">
       <div className="absolute inset-0">
@@ -11,7 +18,16 @@ export const ScannerOverlay: React.FC = () => {
           <div className="absolute -top-12 left-1/2 -translate-x-1/2 text-white text-sm font-medium">
             Position QR code here
           </div>
-          <Camera className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 text-blue-500 animate-pulse" />
+          <BarcodeScannerComponent
+            onUpdate={(_err, result) => {
+              if (result) {
+                console.log(result.getText())
+                onScan(result.getText())
+              }
+              // if (err) console.log("Error: ", err);
+            }}
+          />
+          {/* <Camera className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 text-blue-500 animate-pulse" /> */}
         </div>
       </div>
     </div>
