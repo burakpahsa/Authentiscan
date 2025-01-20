@@ -6,7 +6,6 @@ import { ScannerOverlay } from "./Scanner/ScannerOverlay";
 interface QRScannerProps {
   error?: string | null;
   hasPermission: boolean | null;
-  startScanning: () => Promise<void>;
   onScan: (data: string) => void;
   requestPermission: () => Promise<void>;
 }
@@ -14,7 +13,6 @@ interface QRScannerProps {
 export const QRScanner: React.FC<QRScannerProps> = ({
   error,
   hasPermission,
-  startScanning,
   onScan,
   requestPermission,
 }) => {
@@ -23,12 +21,6 @@ export const QRScanner: React.FC<QRScannerProps> = ({
       requestPermission();
     }
   }, []);
-
-  // useEffect(() => {
-  //   if (hasPermission) {
-  //     startScanning();
-  //   }
-  // }, [hasPermission]);
 
   return (
     <div className="relative w-full">

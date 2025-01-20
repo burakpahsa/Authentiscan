@@ -1,5 +1,4 @@
 import React from "react";
-import { Camera } from "lucide-react";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 type ScannerOverlayProps = {
@@ -26,8 +25,8 @@ export const ScannerOverlay: React.FC<ScannerOverlayProps> = ({
               }
               // if (err) console.log("Error: ", err);
             }}
+            delay={300}
           />
-          {/* <Camera className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 text-blue-500 animate-pulse" /> */}
         </div>
       </div>
     </div>

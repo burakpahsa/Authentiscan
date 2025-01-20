@@ -43,12 +43,8 @@ export const AdminPanel: React.FC = () => {
     setShowScanner(false)
   };
 
-    const { startScanning, hasPermission, requestPermission } =
-      useCamera(handleScan, {
-        fps: 30,
-        qrbox: 250,
-        aspectRatio: 1.0,
-      });
+    const { hasPermission, requestPermission } =
+      useCamera();
 
   return (
     <div className="max-w-4xl mx-auto p-4">
@@ -181,7 +177,6 @@ export const AdminPanel: React.FC = () => {
           onScan={handleScan}
           error={error}
           hasPermission={hasPermission}
-          startScanning={startScanning}
           requestPermission={requestPermission}
           onClose={() => setShowScanner(false)}
         />
