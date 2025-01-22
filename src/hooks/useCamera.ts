@@ -109,7 +109,7 @@ export const useCamera = (
           setScanner(null);
         },
         (errorMessage) => {
-          console.debug('QR Scan error:', errorMessage);
+          // console.debug('QR Scan error:', errorMessage);
         }
       );
 

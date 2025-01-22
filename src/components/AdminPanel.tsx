@@ -20,7 +20,7 @@ export const AdminPanel: React.FC = () => {
     e.preventDefault();
     if (newProduct.name && newProduct.qrCode) {
       addProduct({
-        id: Date.now().toString(),
+        // id: Date.now().toString(),
         name: newProduct.name,
         description: newProduct.description || '',
         manufacturer: newProduct.manufacturer || '',
