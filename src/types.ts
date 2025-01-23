@@ -13,3 +13,10 @@ export interface ScanResult {
   product?: Product;
   message: string;
 }
+
+export interface ScanLog {
+  id: number;
+  qrCode: string;
+  ipAddress?: string;
+  timestamp: string;
+}
