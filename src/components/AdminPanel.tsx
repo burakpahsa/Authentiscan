@@ -96,7 +96,16 @@ export const AdminPanel: React.FC = () => {
               <Package className="w-6 h-6 text-blue-600" />
               <h2 className="text-xl font-semibold">New Product Details</h2>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div
+              className={
+                window.innerWidth > 700 ? "grid grid-cols-2 gap-4" : undefined
+              }
+              style={
+                window.innerWidth <= 700
+                  ? { display: "flex", flexDirection: "column", gap: 10 }
+                  : undefined
+              }
+            >
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Name
@@ -335,7 +344,7 @@ export const AdminPanel: React.FC = () => {
                       flex: 1,
                       gap: 10,
                     }}
-                    >
+                  >
                     <p> {scanLog.id}</p>
                     <div style={{ display: "flex", gap: 10 }}>
                       <p style={{ fontWeight: 600 }}>IP Address: </p>
@@ -343,11 +352,19 @@ export const AdminPanel: React.FC = () => {
                     </div>
                     <div style={{ display: "flex", gap: 10 }}>
                       <p style={{ fontWeight: 600 }}>QR Code: </p>
-                      <p style={{ wordBreak: "break-word", flex: 1, marginRight: 20 }}>
+                      <p
+                        style={{
+                          wordBreak: "break-word",
+                          flex: 1,
+                          marginRight: 20,
+                        }}
+                      >
                         {scanLog.qrCode}
                       </p>
                     </div>
-                    <p style={{marginTop: 10, alignSelf: 'flex-end'}}>{time.toLocaleString()}</p>
+                    <p style={{ marginTop: 10, alignSelf: "flex-end" }}>
+                      {time.toLocaleString()}
+                    </p>
                   </div>
                 </div>
               </div>
