@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { AdminQRScanner } from "./AdminQRScanner";
 import { useCamera } from "../hooks/useCamera";
+// import "./AdminPanel.css"
 
 export const AdminPanel: React.FC = () => {
   const {
@@ -274,7 +275,10 @@ export const AdminPanel: React.FC = () => {
                       <span className="font-medium text-gray-700">
                         QR Code:
                       </span>{" "}
-                      <code className="bg-gray-100 px-2 py-1 rounded">
+                      <code
+                        className="bg-gray-100 px-2 py-1 rounded"
+                        style={{ wordBreak: "break-word" }}
+                      >
                         {product.qrCode}
                       </code>
                     </div>
@@ -324,7 +328,6 @@ export const AdminPanel: React.FC = () => {
                 className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow"
               >
                 <div style={{ display: "flex", gap: 20 }}>
-                  <p> {scanLog.id}</p>
                   <div
                     style={{
                       display: "flex",
@@ -332,17 +335,20 @@ export const AdminPanel: React.FC = () => {
                       flex: 1,
                       gap: 10,
                     }}
-                  >
+                    >
+                    <p> {scanLog.id}</p>
                     <div style={{ display: "flex", gap: 10 }}>
                       <p style={{ fontWeight: 600 }}>IP Address: </p>
                       <p>{scanLog.ipAddress}</p>
                     </div>
                     <div style={{ display: "flex", gap: 10 }}>
                       <p style={{ fontWeight: 600 }}>QR Code: </p>
-                      <p>{scanLog.qrCode}</p>
+                      <p style={{ wordBreak: "break-word", flex: 1, marginRight: 20 }}>
+                        {scanLog.qrCode}
+                      </p>
                     </div>
+                    <p style={{marginTop: 10, alignSelf: 'flex-end'}}>{time.toLocaleString()}</p>
                   </div>
-                  <p>{time.toLocaleString()}</p>
                 </div>
               </div>
             );
