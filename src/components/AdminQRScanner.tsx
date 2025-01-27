@@ -7,22 +7,16 @@ interface Props {
   onClose: () => void;
   error?: string | null;
   hasPermission: boolean | null;
-  startScanning: () => Promise<void>;
   requestPermission: () => Promise<void>;
 }
 
 export const AdminQRScanner: React.FC<Props> = ({
   error,
   hasPermission,
-  startScanning,
   requestPermission,
   onScan,
   onClose,
 }) => {
-  // const handleScan = (data: string) => {
-  //   onScan(data);
-  //   onClose();
-  // };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -39,11 +33,10 @@ export const AdminQRScanner: React.FC<Props> = ({
 
         <div className="mb-6">
           <QRScanner
-            // containerId="admin-qr-reader"
             error={error}
             hasPermission={hasPermission}
-            startScanning={startScanning}
             requestPermission={requestPermission}
+            onScan={onScan}
           />
         </div>
 

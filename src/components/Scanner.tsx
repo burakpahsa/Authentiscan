@@ -24,14 +24,7 @@ export const Scanner: React.FC = () => {
     setShowScanner(false);
   };
 
-  const { startScanning, error, hasPermission, requestPermission } = useCamera(
-    handleScan,
-    {
-      fps: 30,
-      qrbox: 250,
-      aspectRatio: 1.0,
-    }
-  );
+  const { error, hasPermission, requestPermission } = useCamera();
 
   const handleStartScan = () => {
     setShowScanner(true);
@@ -95,8 +88,8 @@ export const Scanner: React.FC = () => {
           <QRScanner
             error={error}
             hasPermission={hasPermission}
-            startScanning={startScanning}
             requestPermission={requestPermission}
+            onScan={handleScan}
           />
         </div>
       )}

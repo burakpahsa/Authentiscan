@@ -44,12 +44,8 @@ export const AdminPanel: React.FC = () => {
     setShowScanner(false)
   };
 
-    const { startScanning, hasPermission, requestPermission } =
-      useCamera(handleScan, {
-        fps: 30,
-        qrbox: 250,
-        aspectRatio: 1.0,
-      });
+    const { hasPermission, requestPermission } =
+      useCamera();
 
     console.log({scans})
 
@@ -179,18 +175,15 @@ export const AdminPanel: React.FC = () => {
             </div>
           </div>
         )}
-
-        {showScanner && (
-          <AdminQRScanner
-            onScan={handleScan}
-            error={error}
-            hasPermission={hasPermission}
-            startScanning={startScanning}
-            requestPermission={requestPermission}
-            onClose={() => setShowScanner(false)}
-          />
-        )}
-
+      {showScanner && (
+        <AdminQRScanner
+          onScan={handleScan}
+          error={error}
+          hasPermission={hasPermission}
+          requestPermission={requestPermission}
+          onClose={() => setShowScanner(false)}
+        />
+      )}
         {authenticProducts.length === 0 ? (
           <div className="text-center py-12">
             <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
