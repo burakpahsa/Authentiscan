@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { CameraPermission } from "./CameraPermission";
 import { ErrorMessage } from "./ErrorMessage";
 import { ScannerOverlay } from "./Scanner/ScannerOverlay";
+import { Loader2 } from "lucide-react";
 
 interface QRScannerProps {
   error?: string | null;
@@ -25,7 +26,11 @@ export const QRScanner: React.FC<QRScannerProps> = ({
   return (
     <div className="relative w-full">
       {error && <ErrorMessage message={error} />}
-      {!hasPermission ? (
+      {hasPermission === null ? (
+        <div className="flex items-center justify-center py-12">
+          <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
+        </div>
+      ) : hasPermission === false ? (
         <CameraPermission onRequestPermission={requestPermission} />
       ) : (
         <div className="relative">
