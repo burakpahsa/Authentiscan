@@ -60,7 +60,9 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     try {
       const { data, error } = await supabase
         .from('scans')
-        .select('*');
+        .select('*')
+        .order('created_at', {ascending: false})
+        .limit(10)
 
       if (error) throw error;
 
