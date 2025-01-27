@@ -1,15 +1,17 @@
 import { create } from 'zustand';
 import { supabase } from '../lib/supabase';
-import { Product } from '../types';
+import { Product, ScanLog } from '../types';
 
 interface AuthStore {
   authenticProducts: Product[];
+  scans: ScanLog[];
   isLoading: boolean;
   error: string | null;
   addProduct: (product: Omit<Product, 'id'>) => Promise<void>;
   removeProduct: (id: string) => Promise<void>;
   verifyProduct: (qrCode: string, ipAddress?: string) => Product | undefined;
   fetchProducts: () => Promise<void>;
+  fetchScans: () => Promise<void>;
 }
 
 const logRequest = async (productQr: string, ipAddress?: string) => {
@@ -22,6 +24,7 @@ const logRequest = async (productQr: string, ipAddress?: string) => {
 
 export const useAuthStore = create<AuthStore>((set, get) => ({
   authenticProducts: [],
+  scans: [],
   isLoading: false,
   error: null,
 
@@ -45,6 +48,30 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       }));
 
       set({ authenticProducts: products });
+    } catch (error) {
+      set({ error: (error as Error).message });
+    } finally {
+      set({ isLoading: false });
+    }
+  },
+
+  fetchScans: async () => {
+    set({ isLoading: true, error: null });
+    try {
+      const { data, error } = await supabase
+        .from('scans')
+        .select('*');
+
+      if (error) throw error;
+
+      const scans: ScanLog[] = data.map(item => ({
+        id: item.id,
+        qrCode: item.qr_code,
+        ipAddress: item.ip_address,
+        timestamp: item.created_at,
+      }));
+
+      set({ scans });
     } catch (error) {
       set({ error: (error as Error).message });
     } finally {
@@ -93,6 +120,12 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
   },
 
   verifyProduct: (qrCode: string, ipAddress?: string) => {
+    // console.log({})
+    get().authenticProducts.forEach((p) => {
+      console.log("scanned QR: ", qrCode)
+      console.log("QR in Database: ", p.qrCode)
+      console.log("are they equal???: ", qrCode === p.qrCode)
+    })
     logRequest(qrCode, ipAddress)
     return get().authenticProducts.find((p) => p.qrCode === qrCode)
   },
