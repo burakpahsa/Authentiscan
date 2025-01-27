@@ -47,8 +47,6 @@ export const AdminPanel: React.FC = () => {
     const { hasPermission, requestPermission } =
       useCamera();
 
-    console.log({scans})
-
   return (
     <>
       <div className="max-w-4xl mx-auto p-4">
