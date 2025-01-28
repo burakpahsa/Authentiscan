@@ -6,14 +6,13 @@ import { QRScanner } from "./QRScanner";
 import { useCamera } from "../hooks/useCamera";
 
 export const Scanner: React.FC = () => {
-  const { fetchProducts } = useAuthStore();
   const [result, setResult] = useState<ScanResult | null>(null);
   const [showScanner, setShowScanner] = useState(false);
   const [ipAddress, setIpAddress] = useState<string>();
   const verifyProduct = useAuthStore((state) => state.verifyProduct);
 
-  const handleScan = (data: string) => {
-    const product = verifyProduct(data, ipAddress);
+  const handleScan = async (data: string) => {
+    const product = await verifyProduct(data, ipAddress);
     setResult({
       isAuthentic: !!product,
       product,
@@ -35,10 +34,6 @@ export const Scanner: React.FC = () => {
     setResult(null);
     setShowScanner(true);
   };
-
-  useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
 
   useEffect(() => {
     if (!ipAddress) {

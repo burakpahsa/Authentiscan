@@ -9,7 +9,7 @@ interface AuthStore {
   error: string | null;
   addProduct: (product: Omit<Product, 'id'>) => Promise<void>;
   removeProduct: (id: string) => Promise<void>;
-  verifyProduct: (qrCode: string, ipAddress?: string) => Product | undefined;
+  verifyProduct: (qrCode: string, ipAddress?: string) => Promise<Product | undefined>;
   fetchProducts: () => Promise<void>;
   fetchScans: () => Promise<void>;
 }
@@ -121,8 +121,25 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     }
   },
 
-  verifyProduct: (qrCode: string, ipAddress?: string) => {
-    logRequest(qrCode, ipAddress)
-    return get().authenticProducts.find((p) => p.qrCode === qrCode)
+  verifyProduct: async (qrCode: string, ipAddress?: string) => {
+    // logRequest(qrCode, ipAddress)
+    const { data, error } = await supabase.from('products').select().eq('qr_code', qrCode).maybeSingle();
+    if (error) throw error;
+    console.log(data)
+    if (data === null) {
+      return undefined
+    }
+    if (data) {
+      const product: Product = {
+        id: data.id,
+        name: data.name,
+        description: data.description || '',
+        manufacturer: data.manufacturer || '',
+        manufactureDate: data.manufacture_date || '',
+        qrCode: data.qr_code,
+        imageUrl: data.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30'
+      }
+      return product;
+    }
   },
 }));
