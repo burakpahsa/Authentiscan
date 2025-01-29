@@ -8,6 +8,8 @@ import {
   AlertCircle,
   QrCode,
   Loader2,
+  CheckCircle,
+  XCircle,
 } from "lucide-react";
 import { AdminQRScanner } from "./AdminQRScanner";
 import { useCamera } from "../hooks/useCamera";
@@ -334,7 +336,9 @@ export const AdminPanel: React.FC = () => {
             return (
               <div
                 key={scanLog.id}
-                className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+                className={`${
+                  scanLog.isVerified ? "bg-green-50" : "bg-red-50"
+                } p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow`}
               >
                 <div style={{ display: "flex", gap: 20 }}>
                   <div
@@ -345,7 +349,14 @@ export const AdminPanel: React.FC = () => {
                       gap: 10,
                     }}
                   >
-                    <p> {scanLog.id}</p>
+                    <div className="flex" style={{alignItems: 'center', gap: 10}}>
+                      {scanLog.isVerified ? (
+                        <CheckCircle className="w-8 h-8 text-green-500" />
+                      ) : (
+                        <XCircle className="w-8 h-8 text-red-500" />
+                      )}
+                      <p> {scanLog.id}</p>
+                    </div>
                     <div style={{ display: "flex", gap: 10 }}>
                       <p style={{ fontWeight: 600 }}>IP Address: </p>
                       <p>{scanLog.ipAddress}</p>

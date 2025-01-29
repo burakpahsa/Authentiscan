@@ -19,4 +19,5 @@ export interface ScanLog {
   qrCode: string;
   ipAddress?: string;
   timestamp: string;
+  isVerified: boolean;
 }

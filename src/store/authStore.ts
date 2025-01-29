@@ -71,6 +71,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         qrCode: item.qr_code,
         ipAddress: item.ip_address,
         timestamp: item.created_at,
+        isVerified: item.is_verified
       }));
 
       set({ scans });
