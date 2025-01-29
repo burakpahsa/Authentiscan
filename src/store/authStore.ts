@@ -14,9 +14,9 @@ interface AuthStore {
   fetchScans: () => Promise<void>;
 }
 
-const logRequest = async (productQr: string, ipAddress?: string) => {
+const logRequest = async (productQr: string, isVerified: boolean, ipAddress?: string) => {
   try {
-    await supabase.from('scans').insert([{ ip_address: ipAddress, qr_code: productQr }])
+    await supabase.from('scans').insert([{ ip_address: ipAddress, qr_code: productQr, is_verified: isVerified }])
   } catch (error) {
     console.error(error)
   }
@@ -122,14 +122,14 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
   },
 
   verifyProduct: async (qrCode: string, ipAddress?: string) => {
-    // logRequest(qrCode, ipAddress)
     const { data, error } = await supabase.from('products').select().eq('qr_code', qrCode).maybeSingle();
     if (error) throw error;
-    console.log(data)
     if (data === null) {
+      logRequest(qrCode, false, ipAddress)
       return undefined
     }
     if (data) {
+      logRequest(qrCode, true, ipAddress)
       const product: Product = {
         id: data.id,
         name: data.name,
