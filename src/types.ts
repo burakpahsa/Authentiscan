@@ -6,6 +6,7 @@ export interface Product {
   manufactureDate: string;
   qrCode: string;
   imageUrl: string;
+  bestBefore: string;
 }
 
 export interface ScanResult {

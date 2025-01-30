@@ -44,7 +44,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         manufacturer: item.manufacturer || '',
         manufactureDate: item.manufacture_date || '',
         qrCode: item.qr_code,
-        imageUrl: item.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30'
+        imageUrl: item.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30',
+        bestBefore: item.best_before
       }));
 
       set({ authenticProducts: products });
@@ -93,7 +94,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
           manufacturer: product.manufacturer,
           manufacture_date: product.manufactureDate,
           qr_code: product.qrCode,
-          image_url: product.imageUrl
+          image_url: product.imageUrl,
+          best_before: product.bestBefore
         }]);
 
       if (error) throw error;
@@ -138,7 +140,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         manufacturer: data.manufacturer || '',
         manufactureDate: data.manufacture_date || '',
         qrCode: data.qr_code,
-        imageUrl: data.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30'
+        imageUrl: data.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30',
+        bestBefore: data.best_before
       }
       return product;
     }

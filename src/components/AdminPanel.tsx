@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import { AdminQRScanner } from "./AdminQRScanner";
 import { useCamera } from "../hooks/useCamera";
-// import "./AdminPanel.css"
 
 export const AdminPanel: React.FC = () => {
   const {
@@ -30,17 +29,27 @@ export const AdminPanel: React.FC = () => {
   const [showScanner, setShowScanner] = useState(false);
   const [newProduct, setNewProduct] = useState<Partial<Product>>({});
   const [showConfirm, setShowConfirm] = useState<string | null>(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   useEffect(() => {
     fetchProducts();
     fetchScans();
   }, [fetchProducts, fetchScans]);
 
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (newProduct.name && newProduct.qrCode) {
       addProduct({
-        // id: Date.now().toString(),
         name: newProduct.name,
         description: newProduct.description || "",
         manufacturer: newProduct.manufacturer || "",
@@ -50,6 +59,7 @@ export const AdminPanel: React.FC = () => {
         imageUrl:
           newProduct.imageUrl ||
           "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
+        bestBefore: newProduct.bestBefore || new Date().toISOString().split("T")[0]
       });
       setNewProduct({});
       setShowForm(false);
@@ -100,10 +110,10 @@ export const AdminPanel: React.FC = () => {
             </div>
             <div
               className={
-                window.innerWidth > 700 ? "grid grid-cols-2 gap-4" : undefined
+                windowWidth > 700 ? "grid grid-cols-2 gap-4" : undefined
               }
               style={
-                window.innerWidth <= 700
+                windowWidth <= 700
                   ? { display: "flex", flexDirection: "column", gap: 10 }
                   : undefined
               }
@@ -175,6 +185,23 @@ export const AdminPanel: React.FC = () => {
                     })
                   }
                   className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Best Before
+                </label>
+                <input
+                  type="date"
+                  value={newProduct.bestBefore || ""}
+                  onChange={(e) =>
+                    setNewProduct({
+                      ...newProduct,
+                      bestBefore: e.target.value,
+                    })
+                  }
+                  className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  required
                 />
               </div>
               <div className="col-span-2">
