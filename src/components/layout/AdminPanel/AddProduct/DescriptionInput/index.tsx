@@ -1,15 +1,13 @@
 import { useRef, useState } from "react";
 import { Product } from "../../../../../types";
-import { Link, Image } from "lucide-react";
-import { InsertLinkModal } from "./InsertLinkModal";
-import { InsertImageModal } from "./InsertImageModal";
+import { InsertHtmlPanel } from "./InsertHtmlPanel";
 
 type DescriptionInputProps = {
   newProduct: Partial<Product>;
   setNewProduct: (val: Partial<Product>) => void;
 };
 
-type HtmlModal = "link" | "image" | null;
+export type HtmlModal = "link" | "image" | null;
 
 export const DescriptionInput: React.FC<DescriptionInputProps> = ({
   newProduct,
@@ -70,23 +68,11 @@ export const DescriptionInput: React.FC<DescriptionInputProps> = ({
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Description
           </label>
-          <button onClick={() => setShowModal("link")} type="button">
-            <Link className="w-4 h-4" />
-          </button>
-          <button onClick={() => setShowModal("image")} type="button">
-            <Image className="w-4 h-4" />
-          </button>
-          {showModal === "link" ? (
-            <InsertLinkModal
-              insertHtml={insertHtml}
-              onCancel={() => setShowModal(null)}
-            />
-          ) : showModal === "image" ? (
-            <InsertImageModal
-              insertHtml={insertHtml}
-              onCancel={() => setShowModal(null)}
-            />
-          ) : null}
+          <InsertHtmlPanel
+            showModal={showModal}
+            setShowModal={setShowModal}
+            insertHtml={insertHtml}
+          />
         </div>
         <textarea
           ref={textareaRef}

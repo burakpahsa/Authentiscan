@@ -2,19 +2,19 @@ import { useState } from "react";
 import { InsertHtmlModal } from "./InsertHtmlModal";
 
 type Props = {
-    insertHtml: (htmlString: string) => void;
-    onCancel: () => void;
-}
+  insertHtml: (htmlString: string) => void;
+  onCancel: () => void;
+};
 
-export const InsertImageModal: React.FC<Props> = ({insertHtml, onCancel}) => {
-      const [imageUrl, setImageUrl] = useState("");
+export const InsertImageModal: React.FC<Props> = ({ insertHtml, onCancel }) => {
+  const [imageUrl, setImageUrl] = useState("");
 
-    const handleSubmit = () => {
-        if (!imageUrl) return;
-        const imageHTML = `<img src="${imageUrl}" style="width: 50px; height: 50px;" />`
-        insertHtml(imageHTML)
-        setImageUrl("");
-    }
+  const handleSubmit = () => {
+    if (!imageUrl) return;
+    const imageHTML = `<img src="${imageUrl}" style="width: 50px; height: 50px;" />`;
+    insertHtml(imageHTML);
+    setImageUrl("");
+  };
   return (
     <InsertHtmlModal
       title="Insert Image"
