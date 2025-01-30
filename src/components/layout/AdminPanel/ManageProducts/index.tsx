@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAuthStore } from "../../../store/authStore";
+import { useAuthStore } from "../../../../store/authStore";
 import { AlertCircle, Loader2, Plus } from "lucide-react";
 import { AddProduct } from "../AddProduct";
 import { ProductCard } from "./ProductCard";
@@ -62,7 +62,7 @@ export const ManageProducts: React.FC = () => {
       ) : (
         <div className="grid gap-4">
           {authenticProducts.map((product) => (
-            <ProductCard product={product} />
+            <ProductCard product={product} key={product.id} />
           ))}
         </div>
       )}

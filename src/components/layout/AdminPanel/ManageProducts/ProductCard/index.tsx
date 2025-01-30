@@ -1,5 +1,5 @@
 import { Flag } from "lucide-react";
-import { Product } from "../../../../types";
+import { Product } from "../../../../../types";
 
 type ProductCardProps = {
   product: Product;
@@ -8,7 +8,6 @@ type ProductCardProps = {
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div
-      key={product.id}
       className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow"
     >
       <div className="flex items-center gap-4">

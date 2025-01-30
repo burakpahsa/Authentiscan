@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useAuthStore } from "../../../store/authStore";
+import { useAuthStore } from "../../../../store/authStore";
 import { ScanLogCard } from "./ScanLogCard";
 
 export const ScanLog: React.FC = () => {
@@ -19,7 +19,7 @@ export const ScanLog: React.FC = () => {
       </div>
       <div className="grid gap-4">
         {scans.map((scanLog) => (
-            <ScanLogCard scanLog={scanLog}/>
+            <ScanLogCard scanLog={scanLog} key={scanLog.id}/>
         ))}
       </div>
     </div>

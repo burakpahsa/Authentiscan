@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Product } from "../../../types";
+import { Product } from "../../../../types";
 import { Link } from "lucide-react";
 
 type DescriptionInputProps = {

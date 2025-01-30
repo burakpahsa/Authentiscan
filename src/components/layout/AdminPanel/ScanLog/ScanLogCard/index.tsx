@@ -1,5 +1,5 @@
 import { CheckCircle, XCircle } from "lucide-react";
-import { ScanLog } from "../../../../types";
+import { ScanLog } from "../../../../../types";
 
 type ScanLogCardProps = {
   scanLog: ScanLog;
@@ -9,7 +9,6 @@ export const ScanLogCard: React.FC<ScanLogCardProps> = ({ scanLog }) => {
   const time = new Date(scanLog.timestamp);
   return (
     <div
-      key={scanLog.id}
       className={`${
         scanLog.isVerified ? "bg-green-50" : "bg-red-50"
       } p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow`}

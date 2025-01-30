@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useAuthStore } from "../../../store/authStore";
-import { Product } from "../../../types";
+import { useAuthStore } from "../../../../store/authStore";
+import { Product } from "../../../../types";
 import { Package, QrCode } from "lucide-react";
 import { AdminQRScanner } from "./AdminQRScanner";
-import { useCamera } from "../../../hooks/useCamera";
+import { useCamera } from "../../../../hooks/useCamera";
 import { DescriptionInput } from "./DescriptionInput";
 
 type AddProductProps = {

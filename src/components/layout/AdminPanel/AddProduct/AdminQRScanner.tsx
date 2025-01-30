@@ -1,6 +1,6 @@
 import React from "react";
 import { ScanIcon } from "lucide-react";
-import { QRScanner } from "../../QRScanner";
+import { QRScanner } from "../../../common/QRScanner";
 
 interface Props {
   onScan: (qrCode: string) => void;

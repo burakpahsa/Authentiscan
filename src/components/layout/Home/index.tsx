@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useAuthStore } from "../../store/authStore";
-import { ScanResult as ScanResultType } from "../../types";
+import { useAuthStore } from "../../../store/authStore";
+import { ScanResult as ScanResultType } from "../../../types";
 import { Camera } from "lucide-react";
-import { QRScanner } from "../QRScanner";
-import { useCamera } from "../../hooks/useCamera";
+import { QRScanner } from "../../common/QRScanner";
+import { useCamera } from "../../../hooks/useCamera";
 import { ScanResult } from "./ScanResult";
 
 export const Scanner: React.FC = () => {
@@ -36,6 +36,7 @@ export const Scanner: React.FC = () => {
     setShowScanner(true);
   };
 
+  // Get user's ip address
   useEffect(() => {
     if (!ipAddress) {
       fetch("https://ipv4.icanhazip.com/")

@@ -1,7 +1,6 @@
-import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { Scanner } from "./components/Home";
-import { AdminPanel } from "./components/AdminPanel";
+import { Scanner } from "./components/layout/Home";
+import { AdminPanel } from "./components/layout/AdminPanel";
 import { QrCode, ShieldCheck, Settings } from "lucide-react";
 
 function App() {

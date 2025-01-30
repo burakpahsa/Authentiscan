@@ -1,5 +1,5 @@
 import { CheckCircle, XCircle } from "lucide-react";
-import { ScanResult } from "../../../types";
+import { ScanResult } from "../../../../types";
 
 type Props = {
   result: ScanResult;
