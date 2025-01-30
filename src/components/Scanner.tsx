@@ -125,8 +125,12 @@ export const Scanner: React.FC = () => {
                   <p className="mt-1">{result.product.manufacturer}</p>
                 </div>
                 <div>
-                  <span className="font-medium text-gray-700">Date:</span>
+                  <span className="font-medium text-gray-700">Manufacture Date:</span>
                   <p className="mt-1">{result.product.manufactureDate}</p>
+                </div>
+                <div>
+                  <span className="font-medium text-gray-700">Best Before:</span>
+                  <p className="mt-1">{result.product.bestBefore}</p>
                 </div>
               </div>
             </div>
