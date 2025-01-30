@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { supabase } from '../lib/supabase';
 import { Product, ScanLog } from '../types';
+import { checkAndFlagProduct, logRequest } from './helpers';
 
 interface AuthStore {
   authenticProducts: Product[];
@@ -12,14 +13,6 @@ interface AuthStore {
   verifyProduct: (qrCode: string, ipAddress?: string) => Promise<Product | undefined>;
   fetchProducts: () => Promise<void>;
   fetchScans: () => Promise<void>;
-}
-
-const logRequest = async (productQr: string, isVerified: boolean, ipAddress?: string) => {
-  try {
-    await supabase.from('scans').insert([{ ip_address: ipAddress, qr_code: productQr, is_verified: isVerified }])
-  } catch (error) {
-    console.error(error)
-  }
 }
 
 export const useAuthStore = create<AuthStore>((set, get) => ({
