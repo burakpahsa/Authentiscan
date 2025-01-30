@@ -11,7 +11,7 @@ export const InsertImageModal: React.FC<Props> = ({ insertHtml, onCancel }) => {
 
   const handleSubmit = () => {
     if (!imageUrl) return;
-    const imageHTML = `<img src="${imageUrl}" style="width: 50px; height: 50px;" />`;
+    const imageHTML = `<a href="${imageUrl}" target="_blank" rel="noopener noreferrer"><img src="${imageUrl}" alt="Product Image" style="width: 50px; height: 50px;" /></a>`;
     insertHtml(imageHTML);
     setImageUrl("");
   };
