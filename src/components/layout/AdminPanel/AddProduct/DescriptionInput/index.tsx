@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
-import { Product } from "../../../../types";
+import { Product } from "../../../../../types";
 import { Link } from "lucide-react";
+import { InsertHtmlModal } from "./InsertHtmlModal";
 
 type DescriptionInputProps = {
   newProduct: Partial<Product>;
@@ -78,21 +79,7 @@ export const DescriptionInput: React.FC<DescriptionInputProps> = ({
             <Link className="w-4 h-4" />
           </button>
           {showModal && (
-            <div
-              style={{
-                position: "absolute",
-                top: 20,
-                left: 60,
-                background: "white",
-                padding: "20px",
-                borderRadius: "8px",
-                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-                display: "flex",
-                flexDirection: "column",
-                gap: 10,
-              }}
-            >
-              <h3>Insert Link</h3>
+            <InsertHtmlModal title="Insert Link" onSubmit={insertLink} onCancel={() => setShowModal(false)}>
               <input
                 type="text"
                 placeholder="Enter URL"
@@ -107,24 +94,7 @@ export const DescriptionInput: React.FC<DescriptionInputProps> = ({
                 onChange={(e) => setLinkText(e.target.value)}
                 className="p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
-              <div className="mt-6 flex justify-end gap-2">
-                <button
-                  onClick={() => setShowModal(false)}
-                  className="px-4 py-2 text-gray-600 hover:text-gray-800"
-                  type="button"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={insertLink}
-                  style={{ marginRight: "10px" }}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                  type="button"
-                >
-                  Insert
-                </button>
-              </div>
-            </div>
+            </InsertHtmlModal>
           )}
         </div>
         <textarea
