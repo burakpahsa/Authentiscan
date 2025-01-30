@@ -15,6 +15,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           src={product.imageUrl}
           alt={product.name}
           className="w-24 h-24 object-cover rounded-lg"
+          style={{alignSelf: 'flex-start'}}
         />
         <div className="flex-1">
           <h3 className="text-lg font-semibold text-gray-900">
