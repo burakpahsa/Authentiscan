@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useAuthStore } from "../store/authStore";
 import { Product } from "../types";
 import {
-  Trash2,
   Plus,
   Package,
   AlertCircle,
@@ -10,6 +9,7 @@ import {
   Loader2,
   CheckCircle,
   XCircle,
+  Flag,
 } from "lucide-react";
 import { AdminQRScanner } from "./AdminQRScanner";
 import { useCamera } from "../hooks/useCamera";
@@ -19,7 +19,6 @@ export const AdminPanel: React.FC = () => {
     authenticProducts,
     scans,
     addProduct,
-    removeProduct,
     fetchProducts,
     fetchScans,
     isLoading,
@@ -28,8 +27,8 @@ export const AdminPanel: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
   const [showScanner, setShowScanner] = useState(false);
   const [newProduct, setNewProduct] = useState<Partial<Product>>({});
-  const [showConfirm, setShowConfirm] = useState<string | null>(null);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  // const [showConfirm, setShowConfirm] = useState<string | null>(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     fetchProducts();
@@ -59,17 +58,19 @@ export const AdminPanel: React.FC = () => {
         imageUrl:
           newProduct.imageUrl ||
           "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
-        bestBefore: newProduct.bestBefore || new Date().toISOString().split("T")[0]
+        bestBefore:
+          newProduct.bestBefore || new Date().toISOString().split("T")[0],
+        isFlagged: false,
       });
       setNewProduct({});
       setShowForm(false);
     }
   };
 
-  const handleDelete = (id: string) => {
-    removeProduct(id);
-    setShowConfirm(null);
-  };
+  // const handleDelete = (id: string) => {
+  //   removeProduct(id);
+  //   setShowConfirm(null);
+  // };
 
   const handleScan = (qrCode: string) => {
     setNewProduct((prev) => ({ ...prev, qrCode }));
@@ -320,8 +321,21 @@ export const AdminPanel: React.FC = () => {
                         {product.qrCode}
                       </code>
                     </div>
+                    {product.isFlagged && (
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "flex-end",
+                          gap: 20,
+                        }}
+                      >
+                        <Flag className="w-5 h-5 text-red-500" />
+                        <p className="text-red-500">3+ Unique Scans</p>
+                      </div>
+                    )}
                   </div>
-                  {showConfirm === product.id ? (
+                  {/* {showConfirm === product.id ? (
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => setShowConfirm(null)}
@@ -343,7 +357,7 @@ export const AdminPanel: React.FC = () => {
                     >
                       <Trash2 className="w-5 h-5" />
                     </button>
-                  )}
+                  )} */}
                 </div>
               </div>
             ))}
@@ -376,7 +390,10 @@ export const AdminPanel: React.FC = () => {
                       gap: 10,
                     }}
                   >
-                    <div className="flex" style={{alignItems: 'center', gap: 10}}>
+                    <div
+                      className="flex"
+                      style={{ alignItems: "center", gap: 10 }}
+                    >
                       {scanLog.isVerified ? (
                         <CheckCircle className="w-8 h-8 text-green-500" />
                       ) : (

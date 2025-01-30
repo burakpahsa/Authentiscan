@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { supabase } from '../lib/supabase';
 import { Product, ScanLog } from '../types';
-import { checkAndFlagProduct, logRequest } from './helpers';
+import { logRequest } from './helpers';
 
 interface AuthStore {
   authenticProducts: Product[];
@@ -10,7 +10,7 @@ interface AuthStore {
   error: string | null;
   addProduct: (product: Omit<Product, 'id'>) => Promise<void>;
   removeProduct: (id: string) => Promise<void>;
-  verifyProduct: (qrCode: string, ipAddress?: string) => Promise<Product | undefined>;
+  verifyProduct: (qrCode: string, ipAddress?: string) => Promise<Omit<Product, 'isFlagged'> | undefined>;
   fetchProducts: () => Promise<void>;
   fetchScans: () => Promise<void>;
 }
@@ -38,7 +38,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         manufactureDate: item.manufacture_date || '',
         qrCode: item.qr_code,
         imageUrl: item.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30',
-        bestBefore: item.best_before
+        bestBefore: item.best_before,
+        isFlagged: item.flagged
       }));
 
       set({ authenticProducts: products });
@@ -126,7 +127,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     }
     if (data) {
       logRequest(qrCode, true, ipAddress)
-      const product: Product = {
+      const product: Omit<Product, 'isFlagged'> = {
         id: data.id,
         name: data.name,
         description: data.description || '',

@@ -7,11 +7,12 @@ export interface Product {
   qrCode: string;
   imageUrl: string;
   bestBefore: string;
+  isFlagged: boolean;
 }
 
 export interface ScanResult {
   isAuthentic: boolean;
-  product?: Product;
+  product?: Omit<Product, 'isFlagged'>;
   message: string;
 }
 
