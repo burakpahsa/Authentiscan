@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Product } from "../../../../../types";
 import { Link } from "lucide-react";
-import { InsertHtmlModal } from "./InsertHtmlModal";
+import { InsertLinkModal } from "./InsertLinkModal";
 
 type DescriptionInputProps = {
   newProduct: Partial<Product>;
@@ -13,19 +13,13 @@ export const DescriptionInput: React.FC<DescriptionInputProps> = ({
   setNewProduct,
 }) => {
   const [showModal, setShowModal] = useState(false);
-  const [linkURL, setLinkURL] = useState("");
-  const [linkText, setLinkText] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   // Track cursor position
   const [cursorPosition, setCursorPosition] = useState(0);
 
   // Function to insert the link into the textarea at the cursor position
-  const insertLink = () => {
-    if (!linkURL || !linkText) return; // Ensure both fields are filled
-
-    const linkHTML = `<a href="${linkURL}" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; color: blue;">${linkText}</a>`;
-
+  const insertHtml = (htmlString: string) => {
     const textarea = textareaRef.current;
     if (!textarea) return;
 
@@ -34,7 +28,7 @@ export const DescriptionInput: React.FC<DescriptionInputProps> = ({
     const after = text.substring(cursorPosition);
 
     // Insert the link at the cursor position
-    const newText = `${before}${linkHTML}${after}`;
+    const newText = `${before}${htmlString}${after}`;
     setNewProduct({
       ...newProduct,
       description: newText,
@@ -42,15 +36,13 @@ export const DescriptionInput: React.FC<DescriptionInputProps> = ({
 
     // Close modal and reset input fields
     setShowModal(false);
-    setLinkURL("");
-    setLinkText("");
 
     // Restore focus and set cursor position after inserted text
     setTimeout(() => {
       textarea.focus();
       textarea.setSelectionRange(
-        cursorPosition + linkHTML.length,
-        cursorPosition + linkHTML.length
+        cursorPosition + htmlString.length,
+        cursorPosition + htmlString.length
       );
     }, 0);
   };
@@ -79,22 +71,10 @@ export const DescriptionInput: React.FC<DescriptionInputProps> = ({
             <Link className="w-4 h-4" />
           </button>
           {showModal && (
-            <InsertHtmlModal title="Insert Link" onSubmit={insertLink} onCancel={() => setShowModal(false)}>
-              <input
-                type="text"
-                placeholder="Enter URL"
-                value={linkURL}
-                onChange={(e) => setLinkURL(e.target.value)}
-                className="p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              />
-              <input
-                type="text"
-                placeholder="Enter Link Text"
-                value={linkText}
-                onChange={(e) => setLinkText(e.target.value)}
-                className="p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              />
-            </InsertHtmlModal>
+            <InsertLinkModal
+              insertHtml={insertHtml}
+              onCancel={() => setShowModal(false)}
+            />
           )}
         </div>
         <textarea
