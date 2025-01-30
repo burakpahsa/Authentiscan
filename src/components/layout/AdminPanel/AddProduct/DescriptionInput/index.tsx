@@ -1,18 +1,21 @@
 import { useRef, useState } from "react";
 import { Product } from "../../../../../types";
-import { Link } from "lucide-react";
+import { Link, Image } from "lucide-react";
 import { InsertLinkModal } from "./InsertLinkModal";
+import { InsertImageModal } from "./InsertImageModal";
 
 type DescriptionInputProps = {
   newProduct: Partial<Product>;
   setNewProduct: (val: Partial<Product>) => void;
 };
 
+type HtmlModal = "link" | "image" | null;
+
 export const DescriptionInput: React.FC<DescriptionInputProps> = ({
   newProduct,
   setNewProduct,
 }) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<HtmlModal>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   // Track cursor position
@@ -35,7 +38,7 @@ export const DescriptionInput: React.FC<DescriptionInputProps> = ({
     });
 
     // Close modal and reset input fields
-    setShowModal(false);
+    setShowModal(null);
 
     // Restore focus and set cursor position after inserted text
     setTimeout(() => {
@@ -67,15 +70,23 @@ export const DescriptionInput: React.FC<DescriptionInputProps> = ({
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Description
           </label>
-          <button onClick={() => setShowModal(true)} type="button">
+          <button onClick={() => setShowModal("link")} type="button">
             <Link className="w-4 h-4" />
           </button>
-          {showModal && (
+          <button onClick={() => setShowModal("image")} type="button">
+            <Image className="w-4 h-4" />
+          </button>
+          {showModal === "link" ? (
             <InsertLinkModal
               insertHtml={insertHtml}
-              onCancel={() => setShowModal(false)}
+              onCancel={() => setShowModal(null)}
             />
-          )}
+          ) : showModal === "image" ? (
+            <InsertImageModal
+              insertHtml={insertHtml}
+              onCancel={() => setShowModal(null)}
+            />
+          ) : null}
         </div>
         <textarea
           ref={textareaRef}
