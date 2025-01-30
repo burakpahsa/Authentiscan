@@ -116,7 +116,7 @@ export const Scanner: React.FC = () => {
               <h3 className="text-lg font-semibold mb-2">
                 {result.product.name}
               </h3>
-              <p className="text-gray-600 mb-4">{result.product.description}</p>
+              <p className="text-gray-600 mb-4" dangerouslySetInnerHTML={{ __html: result.product.description}}/>
               <div className="grid grid-cols-2 gap-4 text-sm bg-white p-4 rounded-lg">
                 <div>
                   <span className="font-medium text-gray-700">

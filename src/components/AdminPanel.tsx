@@ -307,9 +307,7 @@ export const AdminPanel: React.FC = () => {
                     <h3 className="text-lg font-semibold text-gray-900">
                       {product.name}
                     </h3>
-                    <p className="text-gray-600 text-sm mb-2">
-                      {product.description}
-                    </p>
+                    <p dangerouslySetInnerHTML={{ __html: product.description}} className="text-gray-600 text-sm mb-2"/>
                     <div className="text-sm">
                       <span className="font-medium text-gray-700">
                         QR Code:
