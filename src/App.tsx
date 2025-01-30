@@ -1,8 +1,8 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { Scanner } from './components/Scanner';
-import { AdminPanel } from './components/AdminPanel';
-import { QrCode, ShieldCheck, Settings } from 'lucide-react';
+import React from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Scanner } from "./components/PublicScanner";
+import { AdminPanel } from "./components/AdminPanel";
+import { QrCode, ShieldCheck, Settings } from "lucide-react";
 
 function App() {
   return (

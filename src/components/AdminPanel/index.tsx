@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useAuthStore } from "../store/authStore";
-import { Product } from "../types";
+import { useAuthStore } from "../../store/authStore";
+import { Product } from "../../types";
 import {
   Plus,
   Package,
@@ -12,7 +12,7 @@ import {
   Flag,
 } from "lucide-react";
 import { AdminQRScanner } from "./AdminQRScanner";
-import { useCamera } from "../hooks/useCamera";
+import { useCamera } from "../../hooks/useCamera";
 
 export const AdminPanel: React.FC = () => {
   const {
@@ -307,7 +307,10 @@ export const AdminPanel: React.FC = () => {
                     <h3 className="text-lg font-semibold text-gray-900">
                       {product.name}
                     </h3>
-                    <p dangerouslySetInnerHTML={{ __html: product.description}} className="text-gray-600 text-sm mb-2"/>
+                    <p
+                      dangerouslySetInnerHTML={{ __html: product.description }}
+                      className="text-gray-600 text-sm mb-2"
+                    />
                     <div className="text-sm">
                       <span className="font-medium text-gray-700">
                         QR Code:

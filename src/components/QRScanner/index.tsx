@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { CameraPermission } from "./CameraPermission";
 import { ErrorMessage } from "./ErrorMessage";
-import { ScannerOverlay } from "./Scanner/ScannerOverlay";
+import { ScannerOverlay } from "./ScannerOverlay";
 import { Loader2 } from "lucide-react";
 
 interface QRScannerProps {

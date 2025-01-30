@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useAuthStore } from "../store/authStore";
-import { ScanResult } from "../types";
+import { useAuthStore } from "../../store/authStore";
+import { ScanResult } from "../../types";
 import { CheckCircle, XCircle, Camera, RefreshCw } from "lucide-react";
-import { QRScanner } from "./QRScanner";
-import { useCamera } from "../hooks/useCamera";
+import { QRScanner } from "../QRScanner";
+import { useCamera } from "../../hooks/useCamera";
 
 export const Scanner: React.FC = () => {
   const [result, setResult] = useState<ScanResult | null>(null);
@@ -116,7 +116,10 @@ export const Scanner: React.FC = () => {
               <h3 className="text-lg font-semibold mb-2">
                 {result.product.name}
               </h3>
-              <p className="text-gray-600 mb-4" dangerouslySetInnerHTML={{ __html: result.product.description}}/>
+              <p
+                className="text-gray-600 mb-4"
+                dangerouslySetInnerHTML={{ __html: result.product.description }}
+              />
               <div className="grid grid-cols-2 gap-4 text-sm bg-white p-4 rounded-lg">
                 <div>
                   <span className="font-medium text-gray-700">
@@ -125,11 +128,15 @@ export const Scanner: React.FC = () => {
                   <p className="mt-1">{result.product.manufacturer}</p>
                 </div>
                 <div>
-                  <span className="font-medium text-gray-700">Manufacture Date:</span>
+                  <span className="font-medium text-gray-700">
+                    Manufacture Date:
+                  </span>
                   <p className="mt-1">{result.product.manufactureDate}</p>
                 </div>
                 <div>
-                  <span className="font-medium text-gray-700">Best Before:</span>
+                  <span className="font-medium text-gray-700">
+                    Best Before:
+                  </span>
                   <p className="mt-1">{result.product.bestBefore}</p>
                 </div>
               </div>
