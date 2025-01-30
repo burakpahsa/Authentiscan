@@ -23,7 +23,7 @@ export const DescriptionInput: React.FC<DescriptionInputProps> = ({
   const insertLink = () => {
     if (!linkURL || !linkText) return; // Ensure both fields are filled
 
-    const linkHTML = `<a href="${linkURL}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+    const linkHTML = `<a href="${linkURL}" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; color: blue;">${linkText}</a>`;
 
     const textarea = textareaRef.current;
     if (!textarea) return;
@@ -74,7 +74,7 @@ export const DescriptionInput: React.FC<DescriptionInputProps> = ({
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Description
           </label>
-          <button onClick={() => setShowModal(true)}>
+          <button onClick={() => setShowModal(true)} type="button">
             <Link className="w-4 h-4" />
           </button>
           {showModal && (
@@ -111,6 +111,7 @@ export const DescriptionInput: React.FC<DescriptionInputProps> = ({
                 <button
                   onClick={() => setShowModal(false)}
                   className="px-4 py-2 text-gray-600 hover:text-gray-800"
+                  type="button"
                 >
                   Cancel
                 </button>
@@ -118,6 +119,7 @@ export const DescriptionInput: React.FC<DescriptionInputProps> = ({
                   onClick={insertLink}
                   style={{ marginRight: "10px" }}
                   className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  type="button"
                 >
                   Insert
                 </button>
