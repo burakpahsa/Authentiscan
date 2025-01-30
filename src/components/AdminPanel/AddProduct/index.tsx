@@ -4,6 +4,7 @@ import { Product } from "../../../types";
 import { Package, QrCode } from "lucide-react";
 import { AdminQRScanner } from "../AdminQRScanner";
 import { useCamera } from "../../../hooks/useCamera";
+import { DescriptionInput } from "./DescriptionInput";
 
 type AddProductProps = {
   setShowForm: (val: boolean) => void;
@@ -157,22 +158,10 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
               required
             />
           </div>
-          <div className="col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Description
-            </label>
-            <textarea
-              value={newProduct.description || ""}
-              onChange={(e) =>
-                setNewProduct({
-                  ...newProduct,
-                  description: e.target.value,
-                })
-              }
-              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              rows={3}
-            />
-          </div>
+          <DescriptionInput
+            newProduct={newProduct}
+            setNewProduct={setNewProduct}
+          />
           <div className="col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Image URL
