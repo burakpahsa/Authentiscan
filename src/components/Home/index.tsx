@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useAuthStore } from "../../store/authStore";
-import { ScanResult } from "../../types";
-import { CheckCircle, XCircle, Camera, RefreshCw } from "lucide-react";
+import { ScanResult as ScanResultType } from "../../types";
+import { Camera } from "lucide-react";
 import { QRScanner } from "../QRScanner";
 import { useCamera } from "../../hooks/useCamera";
+import { ScanResult } from "./ScanResult";
 
 export const Scanner: React.FC = () => {
-  const [result, setResult] = useState<ScanResult | null>(null);
+  const [result, setResult] = useState<ScanResultType | null>(null);
   const [showScanner, setShowScanner] = useState(false);
   const [ipAddress, setIpAddress] = useState<string>();
   const verifyProduct = useAuthStore((state) => state.verifyProduct);
@@ -89,69 +90,7 @@ export const Scanner: React.FC = () => {
         </div>
       )}
 
-      {result && (
-        <div
-          className={`p-6 rounded-lg shadow-lg ${
-            result.isAuthentic ? "bg-green-50" : "bg-red-50"
-          }`}
-        >
-          <div className="flex items-center gap-3 mb-4">
-            {result.isAuthentic ? (
-              <CheckCircle className="w-8 h-8 text-green-500" />
-            ) : (
-              <XCircle className="w-8 h-8 text-red-500" />
-            )}
-            <h2 className="text-xl font-semibold">{result.message}</h2>
-          </div>
-
-          {result.product && (
-            <div className="mt-4">
-              <div className="aspect-video rounded-lg overflow-hidden mb-4 shadow-md">
-                <img
-                  src={result.product.imageUrl}
-                  alt={result.product.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">
-                {result.product.name}
-              </h3>
-              <p
-                className="text-gray-600 mb-4"
-                dangerouslySetInnerHTML={{ __html: result.product.description }}
-              />
-              <div className="grid grid-cols-2 gap-4 text-sm bg-white p-4 rounded-lg">
-                <div>
-                  <span className="font-medium text-gray-700">
-                    Manufacturer:
-                  </span>
-                  <p className="mt-1">{result.product.manufacturer}</p>
-                </div>
-                <div>
-                  <span className="font-medium text-gray-700">
-                    Manufacture Date:
-                  </span>
-                  <p className="mt-1">{result.product.manufactureDate}</p>
-                </div>
-                <div>
-                  <span className="font-medium text-gray-700">
-                    Best Before:
-                  </span>
-                  <p className="mt-1">{result.product.bestBefore}</p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          <button
-            onClick={handleReset}
-            className="mt-6 w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            <RefreshCw className="w-4 h-4" />
-            Scan Another Code
-          </button>
-        </div>
-      )}
+      {result && <ScanResult result={result} handleReset={handleReset} />}
     </div>
   );
 };
