@@ -2,6 +2,7 @@ import { Link, Image } from "lucide-react";
 import { HtmlModal } from "..";
 import { InsertLinkModal } from "./InsertLinkModal";
 import { InsertImageModal } from "./InsertImageModal";
+import useWindowSize from "../../../../../../hooks/useWindowSize";
 
 type Props = {
   showModal: HtmlModal;
@@ -14,13 +15,15 @@ export const InsertHtmlPanel: React.FC<Props> = ({
   insertHtml,
   setShowModal,
 }) => {
+  const isMobile = useWindowSize(700)
+  const iconSize = isMobile ? 'w-5 h-5' : 'w-4 h-4'
   return (
     <>
       <button onClick={() => setShowModal("link")} type="button">
-        <Link className="w-4 h-4" />
+        <Link className={iconSize} />
       </button>
       <button onClick={() => setShowModal("image")} type="button">
-        <Image className="w-4 h-4" />
+        <Image className={iconSize} />
       </button>
       {showModal === "link" ? (
         <InsertLinkModal

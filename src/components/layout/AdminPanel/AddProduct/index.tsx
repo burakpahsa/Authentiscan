@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuthStore } from "../../../../store/authStore";
 import { Product } from "../../../../types";
 import { Package, QrCode } from "lucide-react";
@@ -6,15 +6,16 @@ import { AdminQRScanner } from "./AdminQRScanner";
 import { useCamera } from "../../../../hooks/useCamera";
 import { DescriptionInput } from "./DescriptionInput";
 import { useTranslation } from "react-i18next";
+import useWindowSize from "../../../../hooks/useWindowSize";
 
 type AddProductProps = {
   setShowForm: (val: boolean) => void;
 };
 
 export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const [newProduct, setNewProduct] = useState<Partial<Product>>({});
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const isMobile = useWindowSize(700)
   const [showScanner, setShowScanner] = useState(false);
   const { addProduct, error } = useAuthStore();
   const { hasPermission, requestPermission } = useCamera();
@@ -46,16 +47,6 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
     setShowScanner(false);
   };
 
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
     <>
       <form
@@ -64,19 +55,19 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
       >
         <div className="flex items-center gap-3 mb-6">
           <Package className="w-6 h-6 text-blue-600" />
-          <h2 className="text-xl font-semibold">{t('add.title')}</h2>
+          <h2 className="text-xl font-semibold">{t("add.title")}</h2>
         </div>
         <div
-          className={windowWidth > 700 ? "grid grid-cols-2 gap-4" : undefined}
+          className={!isMobile ? "grid grid-cols-2 gap-4" : undefined}
           style={
-            windowWidth <= 700
-              ? { display: "flex", flexDirection: "column", gap: 10 }
+            isMobile
+              ? { display: "flex", flexDirection: "column", gap: 20 }
               : undefined
           }
         >
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-            {t('add.name')}
+              {t("add.name")}
             </label>
             <input
               type="text"
@@ -90,7 +81,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-            {t('add.qrCode')}
+              {t("add.qrCode")}
             </label>
             <div className="flex gap-2">
               <input
@@ -113,7 +104,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-            {t('add.manufacturer')}
+              {t("add.manufacturer")}
             </label>
             <input
               type="text"
@@ -129,7 +120,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-            {t('add.manufactureDate')}
+              {t("add.manufactureDate")}
             </label>
             <input
               type="date"
@@ -145,7 +136,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-            {t('add.bestBefore')}
+              {t("add.bestBefore")}
             </label>
             <input
               type="date"
@@ -166,7 +157,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
           />
           <div className="col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">
-            {t('add.imageUrl')}
+              {t("add.imageUrl")}
             </label>
             <input
               type="url"
@@ -179,19 +170,19 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
             />
           </div>
         </div>
-        <div className="mt-6 flex justify-end gap-2">
+        <div className={`mt-6 justify-end gap-2`} style={{display: 'flex', flexDirection: isMobile ? 'column-reverse' : 'row'}}>
           <button
             type="button"
             onClick={() => setShowForm(false)}
             className="px-4 py-2 text-gray-600 hover:text-gray-800"
           >
-            {t('add.cancel')}
+            {t("add.cancel")}
           </button>
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className={`px-4 py-${isMobile ? 3 : 2} bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors`}
           >
-            {t('add.save')}
+            {t("add.save")}
           </button>
         </div>
       </form>

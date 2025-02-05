@@ -19,7 +19,7 @@ export const InsertHtmlModal: React.FC<Props> = ({
       style={{
         position: "absolute",
         top: 20,
-        left: 60,
+        left: 30,
         background: "white",
         padding: "20px",
         borderRadius: "8px",

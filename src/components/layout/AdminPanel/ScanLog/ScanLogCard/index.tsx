@@ -33,7 +33,7 @@ export const ScanLogCard: React.FC<ScanLogCardProps> = ({ scanLog }) => {
           </div>
           <div style={{ display: "flex", gap: 10 }}>
             <p style={{ fontWeight: 600 }}>IP Address: </p>
-            <p>{scanLog.ipAddress}</p>
+            <p style={{wordBreak: 'break-word'}}>{scanLog.ipAddress}</p>
           </div>
           <div style={{ display: "flex", gap: 10 }}>
             <p style={{ fontWeight: 600 }}>QR Code: </p>
