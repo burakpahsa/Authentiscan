@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface UseCameraResult {
   error: string | null;
@@ -7,6 +8,7 @@ interface UseCameraResult {
 }
 
 export const useCamera = (): UseCameraResult => {
+  const {t} = useTranslation()
   const [error, setError] = useState<string | null>(null);
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
 
@@ -23,16 +25,16 @@ export const useCamera = (): UseCameraResult => {
       if (err instanceof Error) {
         switch (err.name) {
           case 'NotAllowedError':
-            setError('Camera access denied. Please enable camera access to scan QR codes.');
+            setError(t('permission.error.notAllowed'));
             break;
           case 'NotFoundError':
-            setError('No camera found. Please make sure your device has a camera.');
+            setError(t('permission.error.notFound'));
             break;
           case 'NotReadableError':
-            setError('Unable to access camera. Please make sure no other app is using it.');
+            setError(t('permission.error.notReadable'));
             break;
           default:
-            setError('An error occurred while accessing the camera.');
+            setError(t('permission.error.default'));
         }
       }
     }

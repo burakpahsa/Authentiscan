@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Product } from "../../../../../types";
 import { InsertHtmlPanel } from "./InsertHtmlPanel";
+import { useTranslation } from "react-i18next";
 
 type DescriptionInputProps = {
   newProduct: Partial<Product>;
@@ -13,6 +14,7 @@ export const DescriptionInput: React.FC<DescriptionInputProps> = ({
   newProduct,
   setNewProduct,
 }) => {
+  const {t} = useTranslation()
   const [showModal, setShowModal] = useState<HtmlModal>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
@@ -66,7 +68,7 @@ export const DescriptionInput: React.FC<DescriptionInputProps> = ({
           }}
         >
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Description
+          {t('add.description')}
           </label>
           <InsertHtmlPanel
             showModal={showModal}

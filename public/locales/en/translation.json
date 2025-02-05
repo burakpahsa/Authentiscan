@@ -7,5 +7,68 @@
     "nav": {
         "scan": "Scan",
         "admin": "Admin"
+    },
+    "result": {
+        "success": "Product authenticated successfully!",
+        "failure": "Warning: This product could not be verified.",
+        "another": "Scan Another Code"
+    },
+    "permission": {
+        "title": "Camera Access Required",
+        "subtitle": "We need camera access to scan QR codes. Your camera will only be used for scanning and no images are stored.",
+        "enable": "Enable Camera",
+        "error": {
+            "notAllowed": "Camera access denied. Please enable camera access to scan QR codes.",
+            "notFound": "No camera found. Please make sure your device has a camera.",
+            "notReadable": "Unable to access camera. Please make sure no other app is using it.",
+            "default": "An error occurred while accessing the camera."
+        }
+    },
+    "product": {
+        "manufacturer": "Manufacturer:",
+        "manufactureDate": "Manufacture Date:",
+        "bestBefore": "Best Before:",
+        "qrCode": "QR Code:",
+        "flag": "{{threshold}}+ Unique Scans"
+    },
+    "manageProducts": {
+        "title": "Product Authentication Management",
+        "subtitle": "Manage authentic products",
+        "add": "Add Product",
+        "error": "Error loading products",
+        "noProducts": "No products added yet",
+        "addFirstHint": "Add your first product to start managing authentications"
+    },
+    "add": {
+        "title": "New Product Details",
+        "name": "Name",
+        "qrCode": "QR Code",
+        "manufacturer": "Manufacturer",
+        "manufactureDate": "Manufacture Date",
+        "bestBefore": "Best Before",
+        "imageUrl": "Image URL",
+        "cancel": "Cancel",
+        "save": "Save Product",
+        "description": "Description",
+        "scan": "Scan QR Code",
+        "positionQR": "Position the QR code within the frame"
+    },
+    "insert": {
+        "insert": "Insert",
+        "link": {
+            "title": "Insert Link",
+            "url": "Enter URL",
+            "text": "Enter Link Text"
+        },
+        "image": {
+            "title": "Insert Image",
+            "url": "Insert Image URL"
+        }
+    },
+    "scans": {
+        "title": "Scan Log",
+        "subtitle": "View latest {{quantity}} scans",
+        "ipAddress": "IP Address: ",
+        "qrCode": "QR Code: "
     }
 }

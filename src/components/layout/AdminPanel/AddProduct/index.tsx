@@ -5,12 +5,14 @@ import { Package, QrCode } from "lucide-react";
 import { AdminQRScanner } from "./AdminQRScanner";
 import { useCamera } from "../../../../hooks/useCamera";
 import { DescriptionInput } from "./DescriptionInput";
+import { useTranslation } from "react-i18next";
 
 type AddProductProps = {
   setShowForm: (val: boolean) => void;
 };
 
 export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
+  const {t} = useTranslation()
   const [newProduct, setNewProduct] = useState<Partial<Product>>({});
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showScanner, setShowScanner] = useState(false);
@@ -62,7 +64,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
       >
         <div className="flex items-center gap-3 mb-6">
           <Package className="w-6 h-6 text-blue-600" />
-          <h2 className="text-xl font-semibold">New Product Details</h2>
+          <h2 className="text-xl font-semibold">{t('add.title')}</h2>
         </div>
         <div
           className={windowWidth > 700 ? "grid grid-cols-2 gap-4" : undefined}
@@ -74,7 +76,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
         >
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Name
+            {t('add.name')}
             </label>
             <input
               type="text"
@@ -88,7 +90,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              QR Code
+            {t('add.qrCode')}
             </label>
             <div className="flex gap-2">
               <input
@@ -111,7 +113,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Manufacturer
+            {t('add.manufacturer')}
             </label>
             <input
               type="text"
@@ -127,7 +129,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Manufacture Date
+            {t('add.manufactureDate')}
             </label>
             <input
               type="date"
@@ -143,7 +145,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Best Before
+            {t('add.bestBefore')}
             </label>
             <input
               type="date"
@@ -164,7 +166,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
           />
           <div className="col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Image URL
+            {t('add.imageUrl')}
             </label>
             <input
               type="url"
@@ -183,13 +185,13 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
             onClick={() => setShowForm(false)}
             className="px-4 py-2 text-gray-600 hover:text-gray-800"
           >
-            Cancel
+            {t('add.cancel')}
           </button>
           <button
             type="submit"
             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
-            Save Product
+            {t('add.save')}
           </button>
         </div>
       </form>

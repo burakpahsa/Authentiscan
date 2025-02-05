@@ -1,11 +1,14 @@
 import { Flag } from "lucide-react";
 import { Product } from "../../../../../types";
+import { useTranslation } from "react-i18next";
+import { THRESHOLD } from "../../../../../store/helpers";
 
 type ProductCardProps = {
   product: Product;
 };
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const {t} = useTranslation()
   return (
     <div
       className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow"
@@ -26,7 +29,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             className="text-gray-600 text-sm mb-2"
           />
           <div className="text-sm">
-            <span className="font-medium text-gray-700">QR Code:</span>{" "}
+            <span className="font-medium text-gray-700">{t('product.qrCode')}</span>{" "}
             <code
               className="bg-gray-100 px-2 py-1 rounded"
               style={{ wordBreak: "break-word" }}
@@ -45,7 +48,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               }}
             >
               <Flag className="w-5 h-5 text-red-500" />
-              <p className="text-red-500">3+ Unique Scans</p>
+              <p className="text-red-500">{t('product.flag', {threshold: THRESHOLD})}</p>
             </div>
           )}
         </div>

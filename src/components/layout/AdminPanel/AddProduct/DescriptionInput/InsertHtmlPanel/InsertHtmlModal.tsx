@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 type Props = {
   children: React.ReactNode;
   title: string;
@@ -11,6 +13,7 @@ export const InsertHtmlModal: React.FC<Props> = ({
   onSubmit,
   onCancel,
 }) => {
+  const {t} = useTranslation()
   return (
     <div
       style={{
@@ -34,7 +37,7 @@ export const InsertHtmlModal: React.FC<Props> = ({
           className="px-4 py-2 text-gray-600 hover:text-gray-800"
           type="button"
         >
-          Cancel
+          {t('add.cancel')}
         </button>
         <button
           onClick={onSubmit}
@@ -42,7 +45,7 @@ export const InsertHtmlModal: React.FC<Props> = ({
           className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           type="button"
         >
-          Insert
+          {t('insert.insert')}
         </button>
       </div>
     </div>

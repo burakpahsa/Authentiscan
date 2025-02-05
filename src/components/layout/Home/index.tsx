@@ -19,9 +19,7 @@ export const Scanner: React.FC = () => {
     setResult({
       isAuthentic: !!product,
       product,
-      message: product
-        ? "Product authenticated successfully!"
-        : "Warning: This product could not be verified.",
+      message: product ? t("result.success") : t("result.failure"),
     });
     setShowScanner(false);
   };
@@ -67,9 +65,7 @@ export const Scanner: React.FC = () => {
           <Camera className="w-8 h-8 text-blue-600" />
         </div>
         <h1 className="text-2xl font-bold text-gray-900">{t("home.scan")}</h1>
-        <p className="text-gray-600 mt-2">
-          Verify product authenticity by scanning its QR code
-        </p>
+        <p className="text-gray-600 mt-2">{t("home.subtitle")}</p>
       </div>
 
       {!showScanner && !result && (
@@ -78,7 +74,7 @@ export const Scanner: React.FC = () => {
           className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors mb-8"
         >
           <Camera className="w-5 h-5" />
-          Start Scanning
+          {t("home.start")}
         </button>
       )}
 

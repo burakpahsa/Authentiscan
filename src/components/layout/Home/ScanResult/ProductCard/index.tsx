@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Product } from "../../../../../types";
 
 type Props = {
@@ -5,6 +6,7 @@ type Props = {
 };
 
 export const ProductResultCard: React.FC<Props> = ({ product }) => {
+  const { t } = useTranslation();
   return (
     <div className="mt-4">
       <div className="aspect-video rounded-lg overflow-hidden mb-4 shadow-md">
@@ -21,15 +23,15 @@ export const ProductResultCard: React.FC<Props> = ({ product }) => {
       />
       <div className="grid grid-cols-2 gap-4 text-sm bg-white p-4 rounded-lg">
         <div>
-          <span className="font-medium text-gray-700">Manufacturer:</span>
+          <span className="font-medium text-gray-700">{t('product.manufacturer')}</span>
           <p className="mt-1">{product.manufacturer}</p>
         </div>
         <div>
-          <span className="font-medium text-gray-700">Manufacture Date:</span>
+          <span className="font-medium text-gray-700">{t('product.manufactureDate')}</span>
           <p className="mt-1">{product.manufactureDate}</p>
         </div>
         <div>
-          <span className="font-medium text-gray-700">Best Before:</span>
+          <span className="font-medium text-gray-700">{t('product.bestBefore')}</span>
           <p className="mt-1">{product.bestBefore}</p>
         </div>
       </div>

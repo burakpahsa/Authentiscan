@@ -1,6 +1,6 @@
 import { supabase } from '../lib/supabase';
 
-const THRESHOLD = 3; // Adjust the threshold as needed
+export const THRESHOLD = 3; // Adjust the threshold as needed
 
 export const checkAndFlagProduct = async (qrCode: string) => {
   const { data: productScans, error } = await supabase

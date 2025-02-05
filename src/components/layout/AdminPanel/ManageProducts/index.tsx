@@ -3,8 +3,10 @@ import { useAuthStore } from "../../../../store/authStore";
 import { AlertCircle, Loader2, Plus } from "lucide-react";
 import { AddProduct } from "../AddProduct";
 import { ProductCard } from "./ProductCard";
+import { useTranslation } from "react-i18next";
 
 export const ManageProducts: React.FC = () => {
+  const {t} =  useTranslation()
   const [showForm, setShowForm] = useState(false);
   const { authenticProducts, fetchProducts, isLoading, error } = useAuthStore();
 
@@ -17,16 +19,16 @@ export const ManageProducts: React.FC = () => {
       <div className="flex justify-between items-center mb-6">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">
-            Product Authentication Management
+            {t('manageProducts.title')}
           </h1>
-          <p className="text-gray-600 mt-1">Manage authentic products</p>
+          <p className="text-gray-600 mt-1">{t('manageProducts.subtitle')}</p>
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
           <Plus className="w-4 h-4" />
-          Add Product
+          {t('manageProducts.add')}
         </button>
       </div>
 
@@ -43,7 +45,7 @@ export const ManageProducts: React.FC = () => {
           <div className="flex items-center">
             <AlertCircle className="w-5 h-5 text-red-500 mr-2" />
             <div>
-              <p className="text-sm text-red-700">Error loading products</p>
+              <p className="text-sm text-red-700">{t('manageProducts.error')}</p>
               <p className="text-xs text-red-600 mt-1">{error}</p>
             </div>
           </div>
@@ -53,10 +55,10 @@ export const ManageProducts: React.FC = () => {
         <div className="text-center py-12">
           <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-medium text-gray-900">
-            No products added yet
+          {t('manageProducts.noProducts')}
           </h3>
           <p className="text-gray-600 mt-1">
-            Add your first product to start managing authentications
+          {t('manageProducts.addFirstHint')}
           </p>
         </div>
       ) : (

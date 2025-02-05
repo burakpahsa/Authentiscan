@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { InsertHtmlModal } from "./InsertHtmlModal";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   insertHtml: (htmlString: string) => void;
@@ -7,6 +8,7 @@ type Props = {
 };
 
 export const InsertImageModal: React.FC<Props> = ({ insertHtml, onCancel }) => {
+  const {t} = useTranslation()
   const [imageUrl, setImageUrl] = useState("");
 
   const handleSubmit = () => {
@@ -17,13 +19,13 @@ export const InsertImageModal: React.FC<Props> = ({ insertHtml, onCancel }) => {
   };
   return (
     <InsertHtmlModal
-      title="Insert Image"
+      title={t('insert.image.title')}
       onSubmit={handleSubmit}
       onCancel={onCancel}
     >
       <input
         type="text"
-        placeholder="Enter Image URL"
+        placeholder={t('insert.image.url')}
         value={imageUrl}
         onChange={(e) => setImageUrl(e.target.value)}
         className="p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
