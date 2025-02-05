@@ -1,11 +1,74 @@
 {
     "home": {
         "scan": "QR-Code scannen",
-        "subtitle": "Überprüfe die Echtheit des Produkts durch Scannen des QR-Codes",
+        "subtitle": "Überprüfe die Echtheit des Produkts, indem du seinen QR-Code scannst",
         "start": "Scannen starten"
     },
     "nav": {
         "scan": "Scannen",
         "admin": "Admin"
+    },
+    "result": {
+        "success": "Produkt erfolgreich authentifiziert!",
+        "failure": "Warnung: Dieses Produkt konnte nicht verifiziert werden.",
+        "another": "Einen weiteren Code scannen"
+    },
+    "permission": {
+        "title": "Kamerazugriff erforderlich",
+        "subtitle": "Wir benötigen Zugriff auf deine Kamera, um QR-Codes zu scannen. Deine Kamera wird nur zum Scannen verwendet, es werden keine Bilder gespeichert.",
+        "enable": "Kamera aktivieren",
+        "error": {
+            "notAllowed": "Kamerazugriff verweigert. Bitte erlaube den Zugriff, um QR-Codes zu scannen.",
+            "notFound": "Keine Kamera gefunden. Bitte stelle sicher, dass dein Gerät eine Kamera hat.",
+            "notReadable": "Kein Zugriff auf die Kamera möglich. Stelle sicher, dass keine andere App sie verwendet.",
+            "default": "Ein Fehler ist beim Zugriff auf die Kamera aufgetreten."
+        }
+    },
+    "product": {
+        "manufacturer": "Hersteller:",
+        "manufactureDate": "Herstellungsdatum:",
+        "bestBefore": "Mindestens haltbar bis:",
+        "qrCode": "QR-Code:",
+        "flag": "{{threshold}}+ eindeutige Scans"
+    },
+    "manageProducts": {
+        "title": "Produkt-Authentifizierungsverwaltung",
+        "subtitle": "Authentische Produkte verwalten",
+        "add": "Produkt hinzufügen",
+        "error": "Fehler beim Laden der Produkte",
+        "noProducts": "Noch keine Produkte hinzugefügt",
+        "addFirstHint": "Füge dein erstes Produkt hinzu, um Authentifizierungen zu verwalten"
+    },
+    "add": {
+        "title": "Neue Produktdetails",
+        "name": "Name",
+        "qrCode": "QR-Code",
+        "manufacturer": "Hersteller",
+        "manufactureDate": "Herstellungsdatum",
+        "bestBefore": "Mindestens haltbar bis",
+        "imageUrl": "Bild-URL",
+        "cancel": "Abbrechen",
+        "save": "Produkt speichern",
+        "description": "Beschreibung",
+        "scan": "QR-Code scannen",
+        "positionQR": "Platziere den QR-Code im Rahmen"
+    },
+    "insert": {
+        "insert": "Einfügen",
+        "link": {
+            "title": "Link einfügen",
+            "url": "URL eingeben",
+            "text": "Link-Text eingeben"
+        },
+        "image": {
+            "title": "Bild einfügen",
+            "url": "Bild-URL eingeben"
+        }
+    },
+    "scans": {
+        "title": "Scan-Protokoll",
+        "subtitle": "Zeige die letzten {{quantity}} Scans an",
+        "ipAddress": "IP-Adresse: ",
+        "qrCode": "QR-Code: "
     }
 }
