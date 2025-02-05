@@ -5,8 +5,10 @@ import { Camera } from "lucide-react";
 import { QRScanner } from "../../common/QRScanner";
 import { useCamera } from "../../../hooks/useCamera";
 import { ScanResult } from "./ScanResult";
+import { useTranslation } from "react-i18next";
 
 export const Scanner: React.FC = () => {
+  const { t } = useTranslation();
   const [result, setResult] = useState<ScanResultType | null>(null);
   const [showScanner, setShowScanner] = useState(false);
   const [ipAddress, setIpAddress] = useState<string>();
@@ -64,7 +66,7 @@ export const Scanner: React.FC = () => {
         <div className="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
           <Camera className="w-8 h-8 text-blue-600" />
         </div>
-        <h1 className="text-2xl font-bold text-gray-900">Scan QR Code</h1>
+        <h1 className="text-2xl font-bold text-gray-900">{t("home.scan")}</h1>
         <p className="text-gray-600 mt-2">
           Verify product authenticity by scanning its QR code
         </p>

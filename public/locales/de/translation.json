@@ -1,0 +1,11 @@
+{
+    "home": {
+        "scan": "QR-Code scannen",
+        "subtitle": "Überprüfe die Echtheit des Produkts durch Scannen des QR-Codes",
+        "start": "Scannen starten"
+    },
+    "nav": {
+        "scan": "Scannen",
+        "admin": "Admin"
+    }
+}
