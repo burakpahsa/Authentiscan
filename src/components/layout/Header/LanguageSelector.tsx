@@ -30,7 +30,7 @@ export const LanguageSelector: React.FC = () => {
       {/* Button to toggle dropdown */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="px-2 py-2 rounded flex items-center gap-1 transition"
+        className="px-2 py-2 rounded flex items-center gap-1 transition hover:text-blue-600"
       >
         {currentLanguage === "en" ? "EN" : "DE"}
         <ChevronDown className="w-4 h-4" />
