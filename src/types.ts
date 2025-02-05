@@ -23,3 +23,5 @@ export interface ScanLog {
   timestamp: string;
   isVerified: boolean;
 }
+
+export type Languages = ['en', 'de']

@@ -6,7 +6,7 @@ export const LanguageSelector: React.FC = () => {
   const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const currentLanguage = i18n.language; // Get current language
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const changeLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
@@ -16,7 +16,10 @@ export const LanguageSelector: React.FC = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -40,7 +43,7 @@ export const LanguageSelector: React.FC = () => {
       {isOpen && (
         <div
           className="flex-column absolute bg-white shadow-lg rounded-b-md"
-          style={{ width: 60, top: 52, alignItems: 'center' }}
+          style={{ width: 60, top: 52, alignItems: "center" }}
         >
           <button
             onClick={() => changeLanguage("en")}

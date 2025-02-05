@@ -1,12 +1,13 @@
 import { CheckCircle, XCircle } from "lucide-react";
 import { ScanLog } from "../../../../../types";
+import { getLocalDateString } from "../../../../../helpers/locales";
 
 type ScanLogCardProps = {
   scanLog: ScanLog;
 };
 
 export const ScanLogCard: React.FC<ScanLogCardProps> = ({ scanLog }) => {
-  const time = new Date(scanLog.timestamp);
+
   return (
     <div
       className={`${
@@ -47,7 +48,7 @@ export const ScanLogCard: React.FC<ScanLogCardProps> = ({ scanLog }) => {
             </p>
           </div>
           <p style={{ marginTop: 10, alignSelf: "flex-end" }}>
-            {time.toLocaleString()}
+            {getLocalDateString(scanLog.timestamp, true)}
           </p>
         </div>
       </div>

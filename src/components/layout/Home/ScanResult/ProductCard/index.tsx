@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Product } from "../../../../../types";
+import { getLocalDateString } from "../../../../../helpers/locales";
 
 type Props = {
   product: Omit<Product, "isFlagged">;
@@ -28,11 +29,11 @@ export const ProductResultCard: React.FC<Props> = ({ product }) => {
         </div>
         <div>
           <span className="font-medium text-gray-700">{t('product.manufactureDate')}</span>
-          <p className="mt-1">{product.manufactureDate}</p>
+          <p className="mt-1">{getLocalDateString(product.manufactureDate)}</p>
         </div>
         <div>
           <span className="font-medium text-gray-700">{t('product.bestBefore')}</span>
-          <p className="mt-1">{product.bestBefore}</p>
+          <p className="mt-1">{getLocalDateString(product.bestBefore)}</p>
         </div>
       </div>
     </div>
