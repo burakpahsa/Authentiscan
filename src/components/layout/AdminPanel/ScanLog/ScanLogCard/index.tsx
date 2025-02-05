@@ -1,12 +1,14 @@
 import { CheckCircle, XCircle } from "lucide-react";
-import { ScanLog } from "../../../../../types";
-import { getLocalDateString } from "../../../../../helpers/locales";
+import { ScanLog } from "@types";
+import { getLocalDateString } from "@helpers/locales";
+import { useTranslation } from "react-i18next";
 
 type ScanLogCardProps = {
   scanLog: ScanLog;
 };
 
 export const ScanLogCard: React.FC<ScanLogCardProps> = ({ scanLog }) => {
+  const {t} = useTranslation()
 
   return (
     <div
@@ -32,11 +34,11 @@ export const ScanLogCard: React.FC<ScanLogCardProps> = ({ scanLog }) => {
             <p> {scanLog.id}</p>
           </div>
           <div style={{ display: "flex", gap: 10 }}>
-            <p style={{ fontWeight: 600 }}>IP Address: </p>
+            <p style={{ fontWeight: 600 }}>{t('scans.ipAddress')}</p>
             <p style={{wordBreak: 'break-word'}}>{scanLog.ipAddress}</p>
           </div>
           <div style={{ display: "flex", gap: 10 }}>
-            <p style={{ fontWeight: 600 }}>QR Code: </p>
+            <p style={{ fontWeight: 600 }}>{t('scans.qrCode')}</p>
             <p
               style={{
                 wordBreak: "break-word",

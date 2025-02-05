@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useAuthStore } from "../../../../store/authStore";
-import { Product } from "../../../../types";
+import { useAuthStore } from "@store/authStore";
+import { Product } from "@types";
 import { Package, QrCode } from "lucide-react";
 import { AdminQRScanner } from "./AdminQRScanner";
-import { useCamera } from "../../../../hooks/useCamera";
+import { useCamera } from "@hooks/useCamera";
 import { DescriptionInput } from "./DescriptionInput";
 import { useTranslation } from "react-i18next";
-import useWindowSize from "../../../../hooks/useWindowSize";
+import useWindowSize from "@hooks/useWindowSize";
 
 type AddProductProps = {
   setShowForm: (val: boolean) => void;

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useAuthStore } from "../../../store/authStore";
-import { ScanResult as ScanResultType } from "../../../types";
+import { useAuthStore } from "@store/authStore";
+import { ScanResult as ScanResultType } from "@types";
 import { Camera } from "lucide-react";
-import { QRScanner } from "../../common/QRScanner";
-import { useCamera } from "../../../hooks/useCamera";
+import { QRScanner } from "@common/QRScanner";
+import { useCamera } from "@hooks/useCamera";
 import { ScanResult } from "./ScanResult";
 import { useTranslation } from "react-i18next";
 

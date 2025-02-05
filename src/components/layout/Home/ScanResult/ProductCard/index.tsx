@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { Product } from "../../../../../types";
-import { getLocalDateString } from "../../../../../helpers/locales";
+import { Product } from "@types";
+import { getLocalDateString } from "@helpers/locales";
 
 type Props = {
   product: Omit<Product, "isFlagged">;

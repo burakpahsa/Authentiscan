@@ -2,7 +2,7 @@ import { QrCode, ShieldCheck, Settings } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { LanguageSelector } from "./LanguageSelector";
-import useWindowSize from "../../../hooks/useWindowSize";
+import useWindowSize from "@hooks/useWindowSize";
 
 export const Header: React.FC = () => {
   const { t } = useTranslation();

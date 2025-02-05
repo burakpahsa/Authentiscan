@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { supabase } from '../lib/supabase';
 import { Product, ScanLog } from '../types';
-import { logRequest } from './helpers';
+import { logRequest } from '@helpers/store';
 
 interface AuthStore {
   authenticProducts: Product[];

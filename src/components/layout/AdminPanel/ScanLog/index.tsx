@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useAuthStore } from "../../../../store/authStore";
+import { useAuthStore } from "@store/authStore";
 import { ScanLogCard } from "./ScanLogCard";
 import { useTranslation } from "react-i18next";
 

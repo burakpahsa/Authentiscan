@@ -2,7 +2,7 @@ import { Link, Image } from "lucide-react";
 import { HtmlModal } from "..";
 import { InsertLinkModal } from "./InsertLinkModal";
 import { InsertImageModal } from "./InsertImageModal";
-import useWindowSize from "../../../../../../hooks/useWindowSize";
+import useWindowSize from "@hooks/useWindowSize";
 
 type Props = {
   showModal: HtmlModal;

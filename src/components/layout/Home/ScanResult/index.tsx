@@ -1,5 +1,5 @@
 import { RefreshCw } from "lucide-react";
-import { ScanResult as ScanResultType } from "../../../../types";
+import { ScanResult as ScanResultType } from "@types";
 import { ProductResultCard } from "./ProductCard";
 import { ResultMessage } from "./ResultMessage";
 import { useTranslation } from "react-i18next";

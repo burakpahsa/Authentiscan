@@ -1,6 +1,6 @@
 import React from "react";
 import { ScanIcon } from "lucide-react";
-import { QRScanner } from "../../../common/QRScanner";
+import { QRScanner } from "@common/QRScanner";
 import { useTranslation } from "react-i18next";
 
 interface Props {

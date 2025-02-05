@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Product } from "../../../../../types";
+import { Product } from "@types";
 import { InsertHtmlPanel } from "./InsertHtmlPanel";
 import { useTranslation } from "react-i18next";
 

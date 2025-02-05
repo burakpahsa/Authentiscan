@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useAuthStore } from "../../../../store/authStore";
+import { useAuthStore } from "@store/authStore";
 import { AlertCircle, Loader2, Plus } from "lucide-react";
 import { AddProduct } from "../AddProduct";
 import { ProductCard } from "./ProductCard";
 import { useTranslation } from "react-i18next";
-import useWindowSize from "../../../../hooks/useWindowSize";
+import useWindowSize from "@hooks/useWindowSize";
 
 export const ManageProducts: React.FC = () => {
   const { t } = useTranslation();
