@@ -43,7 +43,7 @@ export const LanguageSelector: React.FC = () => {
       {isOpen && (
         <div
           className="flex-column absolute bg-white shadow-lg rounded-b-md"
-          style={{ width: 60, top: 52, alignItems: "center" }}
+          style={{ width: 60, top: 52, alignItems: "center", zIndex: 1 }}
         >
           <button
             onClick={() => changeLanguage("en")}

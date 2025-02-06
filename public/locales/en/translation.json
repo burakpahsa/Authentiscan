@@ -70,5 +70,35 @@
         "subtitle": "View latest {{quantity}} scans",
         "ipAddress": "IP Address: ",
         "qrCode": "QR Code: "
+    },
+    "adminNav": {
+        "manage": "Manage Products",
+        "scan": "Scan Log",
+        "codeGenerator": "Code Generator"
+    },
+    "adminNavMobile": {
+        "manage": "Products",
+        "scan": "Scans",
+        "codeGenerator": "Generator"
+    },
+    "generate": {
+        "title": "Generate QR Codes",
+        "subtitle": "Bulk generate QR codes with unique tokens and download as a zip folder",
+        "quantity": "Quantity of codes to generate",
+        "uppercase": "Uppercase",
+        "lowercase": "Lowercase",
+        "numbers": "Numbers",
+        "symbols": "Symbols",
+        "length": "Length",
+        "foreground": "Foreground Color",
+        "background": "Background Color",
+        "errorResistance": "Error Resistance",
+        "submit": "Generate and Download Zip"
+    },
+    "errorCorrection": {
+        "low": "low",
+        "medium": "medium",
+        "quartile": "quartile",
+        "high": "high"
     }
 }
