@@ -1,5 +1,7 @@
 import { TokenSettings } from "@/types";
 import { useTranslation } from "react-i18next";
+import clsx from "clsx";
+import useWindowSize from "@/hooks/useWindowSize";
 
 type Props = {
   tokenSettings: TokenSettings;
@@ -12,8 +14,12 @@ type InputContainerProps = {
 };
 
 const InputContainer: React.FC<InputContainerProps> = ({ label, children }) => {
+  const isMobile = useWindowSize(700)
   return (
-    <label className="flex items-center gap-2 text-sm font-medium text-gray-700 px-5">
+    <label className={clsx(
+      "flex items-center gap-2 text-sm font-medium text-gray-700",
+      isMobile ? '' : 'px-5'
+    )} style={{wordBreak: "break-word"}}>
       {children}
       {label}
     </label>
