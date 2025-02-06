@@ -1,4 +1,5 @@
-import { createToken, useQueryParam } from "@/helpers/tokens";
+import { createToken } from "@/helpers/tokens";
+import { useQueryParam } from "@/hooks/useQueryParam";
 import { useCallback, useEffect, useState } from "react";
 
 export const TokenGenerator: React.FC = () => {

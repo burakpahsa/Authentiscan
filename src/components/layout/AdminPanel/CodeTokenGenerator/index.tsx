@@ -1,3 +1,4 @@
+import { QRCodeGenerator } from "./QRCodeGenerator";
 import { TokenGenerator } from "./TokenGenerator";
 
 export const CodeTokenGenerator: React.FC = () => {
@@ -12,6 +13,7 @@ export const CodeTokenGenerator: React.FC = () => {
         </div>
       </div>
       <TokenGenerator />
+      <QRCodeGenerator />
     </div>
   );
 };
