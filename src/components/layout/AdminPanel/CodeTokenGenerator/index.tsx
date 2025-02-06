@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { QRCodeGenerator } from "./QRCodeGenerator";
-import { TokenGenerator } from "./TokenGenerator";
 import { FormInput } from "@/components/common/FormInput";
 import useWindowSize from "@/hooks/useWindowSize";
-import { createToken } from "@/helpers/tokens";
 import { ErrorCorrectionLevel, QrCodeSettings, TokenSettings } from "@/types";
 import { TokenSettingsChecks } from "./TokenSettingsChecks";
+import { generateAndDownloadZip } from "@/helpers/downloads";
 
 export const errorCorrectionLevels = [
   "low",
@@ -137,9 +135,24 @@ export const CodeTokenGenerator: React.FC = () => {
               </select>
             </div>
           </div>
+          <div className="flex w-full mt-6 justify-end">
+            <button
+              type="button"
+              onClick={() =>
+                generateAndDownloadZip(
+                  bulkQuantity,
+                  tokenSettings,
+                  qrCodeSettings
+                )
+              }
+              className={`px-4 py-${
+                isMobile ? 3 : 2
+              } bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors`}
+            >
+              Generate and Download Zip
+            </button>
+          </div>
         </div>
-        <TokenGenerator />
-        <QRCodeGenerator />
       </div>
     </div>
   );

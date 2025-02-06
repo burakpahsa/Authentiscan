@@ -1,3 +1,5 @@
+import { TokenSettings } from "@/types";
+
 // Durstenfeld shuffle
 function shuffleArrayMutate<T>(array: T[]): T[] {
     for (let i = array.length - 1; i > 0; i--) {
@@ -33,4 +35,22 @@ export function createToken({
     ].join('');
 
     return shuffleString(allAlphabet.repeat(length)).substring(0, length);
+}
+
+export const createBulkTokens = (quantity: number, tokenSettings: TokenSettings) => {
+  const result  = []
+  for (let i = 0; i < quantity; i++) {
+    const token = createToken({
+      withUppercase: tokenSettings.withUppercase,
+      withLowercase: tokenSettings.withLowercase,
+      withNumbers: tokenSettings.withNumbers,
+      withSymbols: tokenSettings.withSymbols,
+      length: tokenSettings.length
+    })
+    result.push({
+      id: i,
+      token
+    })
+  }
+  return result
 }
