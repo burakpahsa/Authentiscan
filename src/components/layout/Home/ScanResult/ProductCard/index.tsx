@@ -30,7 +30,7 @@ export const ProductResultCard: React.FC<Props> = ({ product }) => {
         dangerouslySetInnerHTML={{ __html: product.description }}
         style={{ wordBreak: "break-word" }}
       />
-      <div className="grid grid-cols-2 gap-4 text-sm bg-white p-4 rounded-lg">
+      <div className="grid grid-cols-2 gap-4 text-sm p-4 rounded-lg">
         <div>
           <span className="font-medium text-gray-700">
             {t("product.manufacturer")}
