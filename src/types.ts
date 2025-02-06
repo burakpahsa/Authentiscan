@@ -25,3 +25,10 @@ export interface ScanLog {
 }
 
 export type Languages = ['en', 'de']
+
+export type TabItem = {
+  name: string,
+  path: string
+}
+
+export type Tabs = TabItem[]
