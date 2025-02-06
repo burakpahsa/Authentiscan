@@ -7,6 +7,7 @@ import { useCamera } from "@hooks/useCamera";
 import { DescriptionInput } from "./DescriptionInput";
 import { useTranslation } from "react-i18next";
 import useWindowSize from "@hooks/useWindowSize";
+import { FormInput } from "@/components/common/FormInput";
 
 type AddProductProps = {
   setShowForm: (val: boolean) => void;
@@ -15,7 +16,7 @@ type AddProductProps = {
 export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
   const { t } = useTranslation();
   const [newProduct, setNewProduct] = useState<Partial<Product>>({});
-  const isMobile = useWindowSize(700)
+  const isMobile = useWindowSize(700);
   const [showScanner, setShowScanner] = useState(false);
   const { addProduct, error } = useAuthStore();
   const { hasPermission, requestPermission } = useCamera();
@@ -65,112 +66,85 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
               : undefined
           }
         >
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("add.name")}
-            </label>
-            <input
-              type="text"
-              value={newProduct.name || ""}
-              onChange={(e) =>
-                setNewProduct({ ...newProduct, name: e.target.value })
-              }
-              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("add.qrCode")}
-            </label>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={newProduct.qrCode || ""}
-                onChange={(e) =>
-                  setNewProduct({ ...newProduct, qrCode: e.target.value })
-                }
-                className="flex-1 p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                required
-              />
-              <button
-                type="button"
-                onClick={() => setShowScanner(true)}
-                className="px-3 py-2 bg-gray-100 text-gray-600 rounded-md hover:bg-gray-200 transition-colors"
-              >
-                <QrCode className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("add.manufacturer")}
-            </label>
-            <input
-              type="text"
-              value={newProduct.manufacturer || ""}
-              onChange={(e) =>
-                setNewProduct({
-                  ...newProduct,
-                  manufacturer: e.target.value,
-                })
-              }
-              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("add.manufactureDate")}
-            </label>
-            <input
-              type="date"
-              value={newProduct.manufactureDate || ""}
-              onChange={(e) =>
-                setNewProduct({
-                  ...newProduct,
-                  manufactureDate: e.target.value,
-                })
-              }
-              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("add.bestBefore")}
-            </label>
-            <input
-              type="date"
-              value={newProduct.bestBefore || ""}
-              onChange={(e) =>
-                setNewProduct({
-                  ...newProduct,
-                  bestBefore: e.target.value,
-                })
-              }
-              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              required
-            />
-          </div>
+          <FormInput
+            label={t("add.name")}
+            value={newProduct.name || ""}
+            required
+            onChange={(val: string) =>
+              setNewProduct({ ...newProduct, name: val })
+            }
+          />
+          <FormInput
+            label={t("add.qrCode")}
+            value={newProduct.qrCode || ""}
+            onChange={(val: string) =>
+              setNewProduct({ ...newProduct, qrCode: val })
+            }
+            required
+          >
+            <button
+              type="button"
+              onClick={() => setShowScanner(true)}
+              className="px-3 py-2 bg-gray-100 text-gray-600 rounded-md hover:bg-gray-200 transition-colors"
+            >
+              <QrCode className="w-5 h-5" />
+            </button>
+          </FormInput>
+          <FormInput
+            label={t("add.manufacturer")}
+            value={newProduct.manufacturer || ""}
+            onChange={(val: string) =>
+              setNewProduct({
+                ...newProduct,
+                manufacturer: val,
+              })
+            }
+          />
+          <FormInput
+            label={t("add.manufactureDate")}
+            type="date"
+            value={newProduct.manufactureDate || ""}
+            onChange={(val: string) =>
+              setNewProduct({
+                ...newProduct,
+                manufactureDate: val,
+              })
+            }
+          />
+          <FormInput
+            label={t("add.bestBefore")}
+            type="date"
+            value={newProduct.bestBefore || ""}
+            onChange={(val: string) =>
+              setNewProduct({
+                ...newProduct,
+                bestBefore: val,
+              })
+            }
+            required
+          />
           <DescriptionInput
             newProduct={newProduct}
             setNewProduct={setNewProduct}
           />
-          <div className="col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("add.imageUrl")}
-            </label>
-            <input
-              type="url"
-              value={newProduct.imageUrl || ""}
-              onChange={(e) =>
-                setNewProduct({ ...newProduct, imageUrl: e.target.value })
-              }
-              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="https://example.com/image.jpg"
-            />
-          </div>
+          <FormInput
+            outerDivStyle="col-span-2"
+            placeholder="https://example.com/image.jpg"
+            label={t("add.imageUrl")}
+            type="url"
+            value={newProduct.imageUrl || ""}
+            onChange={(val: string) =>
+              setNewProduct({ ...newProduct, imageUrl: val })
+            }
+          />
         </div>
-        <div className={`mt-6 justify-end gap-2`} style={{display: 'flex', flexDirection: isMobile ? 'column-reverse' : 'row'}}>
+        <div
+          className={`mt-6 justify-end gap-2`}
+          style={{
+            display: "flex",
+            flexDirection: isMobile ? "column-reverse" : "row",
+          }}
+        >
           <button
             type="button"
             onClick={() => setShowForm(false)}
@@ -180,7 +154,9 @@ export const AddProduct: React.FC<AddProductProps> = ({ setShowForm }) => {
           </button>
           <button
             type="submit"
-            className={`px-4 py-${isMobile ? 3 : 2} bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors`}
+            className={`px-4 py-${
+              isMobile ? 3 : 2
+            } bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors`}
           >
             {t("add.save")}
           </button>
