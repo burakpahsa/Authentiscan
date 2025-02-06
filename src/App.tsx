@@ -16,7 +16,7 @@ function App() {
         <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           <Routes>
             <Route path="/" element={<Scanner />} />
-            <Route path="/admin" element={<AdminPanel />} />
+            <Route path="/admin*" element={<AdminPanel />} />
           </Routes>
         </main>
       </div>
