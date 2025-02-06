@@ -25,7 +25,7 @@ export const Header: React.FC = () => {
           {!isMobile && t("nav.scan")}
         </Link>
         <Link
-          to="/admin"
+          to="/admin/manage-products"
           className="flex items-center px-3 py-2 rounded-md text-gray-700 hover:text-blue-600"
         >
           <Settings className={iconSize} />
