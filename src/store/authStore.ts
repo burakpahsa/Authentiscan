@@ -122,12 +122,12 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     const { data, error } = await supabase.from('products').select().eq('qr_code', qrCode).maybeSingle();
     if (error) throw error;
     if (data === null) {
-      logRequest(qrCode, false, ipAddress)
+      logRequest(qrCode, false, false, ipAddress)
       return undefined
     }
     if (data) {
-      logRequest(qrCode, true, ipAddress)
-      const product: Omit<Product, 'isFlagged'> = {
+      const isFlagged = await logRequest(qrCode, true, !data.flagged, ipAddress)
+      const product: Product = {
         id: data.id,
         name: data.name,
         description: data.description || '',
@@ -135,7 +135,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         manufactureDate: data.manufacture_date || '',
         qrCode: data.qr_code,
         imageUrl: data.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30',
-        bestBefore: data.best_before
+        bestBefore: data.best_before,
+        isFlagged: data.flagged || isFlagged
       }
       return product;
     }

@@ -1,9 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { Product } from "@types";
 import { getLocalDateString } from "@helpers/locales";
+import { Flag } from "lucide-react";
+import { THRESHOLD } from "@/helpers/store";
 
 type Props = {
-  product: Omit<Product, "isFlagged">;
+  product: Product;
 };
 
 export const ProductResultCard: React.FC<Props> = ({ product }) => {
@@ -17,26 +19,55 @@ export const ProductResultCard: React.FC<Props> = ({ product }) => {
           className="w-full h-full object-cover"
         />
       </div>
-      <h3 className="text-lg font-semibold mb-2" style={{wordBreak: 'break-word'}}>{product.name}</h3>
+      <h3
+        className="text-lg font-semibold mb-2"
+        style={{ wordBreak: "break-word" }}
+      >
+        {product.name}
+      </h3>
       <p
         className="text-gray-600 mb-4"
         dangerouslySetInnerHTML={{ __html: product.description }}
-        style={{wordBreak: 'break-word'}}
+        style={{ wordBreak: "break-word" }}
       />
       <div className="grid grid-cols-2 gap-4 text-sm bg-white p-4 rounded-lg">
         <div>
-          <span className="font-medium text-gray-700">{t('product.manufacturer')}</span>
-          <p className="mt-1" style={{wordBreak: 'break-word'}}>{product.manufacturer}</p>
+          <span className="font-medium text-gray-700">
+            {t("product.manufacturer")}
+          </span>
+          <p className="mt-1" style={{ wordBreak: "break-word" }}>
+            {product.manufacturer}
+          </p>
         </div>
         <div>
-          <span className="font-medium text-gray-700">{t('product.manufactureDate')}</span>
+          <span className="font-medium text-gray-700">
+            {t("product.manufactureDate")}
+          </span>
           <p className="mt-1">{getLocalDateString(product.manufactureDate)}</p>
         </div>
         <div>
-          <span className="font-medium text-gray-700">{t('product.bestBefore')}</span>
+          <span className="font-medium text-gray-700">
+            {t("product.bestBefore")}
+          </span>
           <p className="mt-1">{getLocalDateString(product.bestBefore)}</p>
         </div>
       </div>
+        {product.isFlagged && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+              gap: 20,
+              marginTop: 10,
+            }}
+          >
+            <Flag className="w-5 h-5 text-red-500" />
+            <p className="text-red-500">
+              {t("product.flag", { threshold: THRESHOLD })}
+            </p>
+          </div>
+        )}
     </div>
   );
 };

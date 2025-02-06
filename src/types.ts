@@ -14,7 +14,7 @@ export interface Product {
 
 export interface ScanResult {
   isAuthentic: boolean;
-  product?: Omit<Product, 'isFlagged'>;
+  product?: Product;
   message: string;
 }
 
