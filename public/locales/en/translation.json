@@ -11,7 +11,8 @@
     "result": {
         "success": "Product authenticated successfully!",
         "failure": "Warning: This product could not be verified.",
-        "another": "Scan Another Code"
+        "another": "Scan Another Code",
+        "flagged": "There have been a suspicious amount of scans for this product."
     },
     "permission": {
         "title": "Camera Access Required",

@@ -19,7 +19,12 @@ export const Scanner: React.FC = () => {
     setResult({
       isAuthentic: !!product,
       product,
-      message: product ? t("result.success") : t("result.failure"),
+      message:
+        product && product.isFlagged
+          ? t("result.flagged")
+          : product
+          ? t("result.success")
+          : t("result.failure"),
     });
     setShowScanner(false);
   };

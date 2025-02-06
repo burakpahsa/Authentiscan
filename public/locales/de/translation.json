@@ -11,7 +11,8 @@
     "result": {
         "success": "Produkt erfolgreich authentifiziert!",
         "failure": "Warnung: Dieses Produkt konnte nicht verifiziert werden.",
-        "another": "Einen weiteren Code scannen"
+        "another": "Einen weiteren Code scannen",
+        "flagged": "Es gab eine verdächtige Anzahl an Scans für dieses Produkt."
     },
     "permission": {
         "title": "Kamerazugriff erforderlich",

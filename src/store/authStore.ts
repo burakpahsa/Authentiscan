@@ -10,7 +10,7 @@ interface AuthStore {
   error: string | null;
   addProduct: (product: Omit<Product, 'id'>) => Promise<void>;
   removeProduct: (id: string) => Promise<void>;
-  verifyProduct: (qrCode: string, ipAddress?: string) => Promise<Omit<Product, 'isFlagged'> | undefined>;
+  verifyProduct: (qrCode: string, ipAddress?: string) => Promise<Product | undefined>;
   fetchProducts: () => Promise<void>;
   fetchScans: () => Promise<void>;
 }

@@ -1,8 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Product } from "@types";
 import { getLocalDateString } from "@helpers/locales";
-import { Flag } from "lucide-react";
-import { THRESHOLD } from "@/helpers/store";
 
 type Props = {
   product: Product;
@@ -10,6 +8,8 @@ type Props = {
 
 export const ProductResultCard: React.FC<Props> = ({ product }) => {
   const { t } = useTranslation();
+
+  console.log({product})
   return (
     <div className="mt-4">
       <div className="aspect-video rounded-lg overflow-hidden mb-4 shadow-md">
@@ -52,22 +52,6 @@ export const ProductResultCard: React.FC<Props> = ({ product }) => {
           <p className="mt-1">{getLocalDateString(product.bestBefore)}</p>
         </div>
       </div>
-        {product.isFlagged && (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-              gap: 20,
-              marginTop: 10,
-            }}
-          >
-            <Flag className="w-5 h-5 text-red-500" />
-            <p className="text-red-500">
-              {t("product.flag", { threshold: THRESHOLD })}
-            </p>
-          </div>
-        )}
     </div>
   );
 };
