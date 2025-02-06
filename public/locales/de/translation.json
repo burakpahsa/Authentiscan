@@ -100,5 +100,7 @@
         "medium": "mittel",
         "quartile": "quartil",
         "high": "hoch"
-    }
+    },
+    "confirm": "Bestätigen",
+    "cancel": "Abbrechen"
 }

@@ -100,5 +100,7 @@
         "medium": "medium",
         "quartile": "quartile",
         "high": "high"
-    }
+    },
+    "confirm": "Confirm",
+    "cancel": "Cancel"
 }
