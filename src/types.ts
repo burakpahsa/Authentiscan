@@ -1,3 +1,5 @@
+import { errorCorrectionLevels } from "./components/layout/AdminPanel/CodeTokenGenerator";
+
 export interface Product {
   id: string;
   name: string;
@@ -32,3 +34,19 @@ export type TabItem = {
 }
 
 export type Tabs = TabItem[]
+
+export type TokenSettings = {
+  length: number;
+  withUppercase: boolean;
+  withLowercase: boolean;
+  withNumbers: boolean;
+  withSymbols: boolean;
+}
+
+export type ErrorCorrectionLevel = (typeof errorCorrectionLevels)[number];
+
+export type QrCodeSettings = {
+  foreground: string;
+  background: string;
+  errorCorrectionLevel: ErrorCorrectionLevel;
+}

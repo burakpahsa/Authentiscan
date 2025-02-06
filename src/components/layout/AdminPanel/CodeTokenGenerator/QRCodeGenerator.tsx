@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQRCode } from "@/hooks/useQRCode";
 
-const errorCorrectionLevels = ["low", "medium", "quartile", "high"] as const;
+ const errorCorrectionLevels = ["low", "medium", "quartile", "high"] as const;
 type ErrorCorrectionLevel = (typeof errorCorrectionLevels)[number];
 
 export const QRCodeGenerator: React.FC = () => {
