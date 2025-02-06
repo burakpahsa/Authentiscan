@@ -70,5 +70,30 @@
         "subtitle": "Zeige die letzten {{quantity}} Scans an",
         "ipAddress": "IP-Adresse: ",
         "qrCode": "QR-Code: "
+    },
+    "adminNav": {
+        "manage": "Produkte verwalten",
+        "scan": "Scan-Protokoll",
+        "codeGenerator": "Code- + Token-Generator"
+    },
+    "generate": {
+        "title": "QR-Codes generieren",
+        "subtitle": "QR-Codes mit einzigartigen Tokens in großen Mengen generieren und als ZIP herunterladen",
+        "quantity": "Anzahl der zu generierenden Codes",
+        "uppercase": "Großbuchstaben",
+        "lowercase": "Kleinbuchstaben",
+        "numbers": "Zahlen",
+        "symbols": "Symbole",
+        "length": "Länge",
+        "foreground": "Vordergrundfarbe",
+        "background": "Hintergrundfarbe",
+        "errorResistance": "Fehlertoleranz",
+        "submit": "Generieren und ZIP herunterladen"
+    },
+    "errorCorrection": {
+        "low": "niedrig",
+        "medium": "mittel",
+        "quartile": "quartil",
+        "high": "hoch"
     }
 }

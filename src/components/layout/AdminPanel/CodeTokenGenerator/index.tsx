@@ -4,6 +4,7 @@ import useWindowSize from "@/hooks/useWindowSize";
 import { ErrorCorrectionLevel, QrCodeSettings, TokenSettings } from "@/types";
 import { TokenSettingsChecks } from "./TokenSettingsChecks";
 import { generateAndDownloadZip } from "@/helpers/downloads";
+import { useTranslation } from "react-i18next";
 
 export const errorCorrectionLevels = [
   "low",
@@ -13,6 +14,7 @@ export const errorCorrectionLevels = [
 ] as const;
 
 export const CodeTokenGenerator: React.FC = () => {
+  const { t } = useTranslation();
   const [bulkQuantity, setBulkQuantity] = useState(10);
   const [tokenSettings, setTokenSettings] = useState<TokenSettings>({
     length: 64,
@@ -33,9 +35,9 @@ export const CodeTokenGenerator: React.FC = () => {
       <div className="flex justify-between items-center mb-6">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">
-            Generate Code and Token
+            {t('generate.title')}
           </h1>
-          <p className="text-gray-600 mt-1">Create in bulk maybe</p>
+          <p className="text-gray-600 mt-1">{t('generate.subtitle')}</p>
         </div>
       </div>
       <div className="mb-8 p-6 bg-white rounded-lg shadow-lg">
@@ -48,7 +50,7 @@ export const CodeTokenGenerator: React.FC = () => {
           }
         >
           <FormInput
-            label="Quantity of codes to generate"
+            label={t('generate.quantity')}
             type="number"
             value={bulkQuantity.toString()}
             required
@@ -60,7 +62,7 @@ export const CodeTokenGenerator: React.FC = () => {
           />
           <div className="mt-4 col-span-2">
             <label className="block mb-2 text-sm font-medium text-gray-700">
-              Length: {tokenSettings.length}
+              {t('generate.length')}: {tokenSettings.length}
             </label>
             <input
               type="range"
@@ -79,7 +81,7 @@ export const CodeTokenGenerator: React.FC = () => {
           </div>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
-              Foreground Color:
+              {t('generate.foreground')}:
             </label>
             <input
               type="color"
@@ -96,7 +98,7 @@ export const CodeTokenGenerator: React.FC = () => {
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
-              Background Color:
+            {t('generate.background')}:
             </label>
             <input
               type="color"
@@ -113,7 +115,7 @@ export const CodeTokenGenerator: React.FC = () => {
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
-              Error Resistance:
+            {t('generate.errorResistance')}:
             </label>
             <select
               value={qrCodeSettings.errorCorrectionLevel}
@@ -127,7 +129,7 @@ export const CodeTokenGenerator: React.FC = () => {
             >
               {errorCorrectionLevels.map((level) => (
                 <option key={level} value={level}>
-                  {level}
+                  {t(`errorCorrection.${level}`)}
                 </option>
               ))}
             </select>
@@ -147,7 +149,7 @@ export const CodeTokenGenerator: React.FC = () => {
               isMobile ? 3 : 2
             } bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors`}
           >
-            Generate and Download Zip
+            {t('generate.submit')}
           </button>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { TokenSettings } from "@/types";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   tokenSettings: TokenSettings;
@@ -23,9 +24,10 @@ export const TokenSettingsChecks: React.FC<Props> = ({
   tokenSettings,
   setTokenSettings,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="grid grid-cols-2 gap-4">
-      <InputContainer label="Uppercase">
+      <InputContainer label={t('generate.uppercase')}>
         <input
           type="checkbox"
           checked={tokenSettings.withUppercase}
@@ -37,7 +39,7 @@ export const TokenSettingsChecks: React.FC<Props> = ({
           }
         />
       </InputContainer>
-      <InputContainer label="Lowercase">
+      <InputContainer label={t('generate.lowercase')}>
         <input
           type="checkbox"
           checked={tokenSettings.withLowercase}
@@ -49,7 +51,7 @@ export const TokenSettingsChecks: React.FC<Props> = ({
           }
         />
       </InputContainer>
-      <InputContainer label="Numbers">
+      <InputContainer label={t('generate.numbers')}>
         <input
           type="checkbox"
           checked={tokenSettings.withNumbers}
@@ -61,7 +63,7 @@ export const TokenSettingsChecks: React.FC<Props> = ({
           }
         />
       </InputContainer>
-      <InputContainer label="Symbols">
+      <InputContainer label={t('generate.symbols')}>
         <input
           type="checkbox"
           checked={tokenSettings.withSymbols}
