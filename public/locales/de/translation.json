@@ -103,5 +103,12 @@
         "high": "hoch"
     },
     "confirm": "Bestätigen",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "logout": "Abmelden",
+    "login": {
+        "title": "Admin-Anmeldung",
+        "email": "E-Mail",
+        "password": "Passwort",
+        "submit": "Anmelden"
+    }
 }
