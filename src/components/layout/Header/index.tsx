@@ -3,8 +3,14 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { LanguageSelector } from "./LanguageSelector";
 import useWindowSize from "@hooks/useWindowSize";
+import { Session } from "@supabase/auth-js";
+import { Logout } from "./Logout";
 
-export const Header: React.FC = () => {
+type Props = {
+  session: Session | null;
+}
+
+export const Header: React.FC<Props> = ({session}) => {
   const { t } = useTranslation();
   const isMobile = useWindowSize(600);
 
@@ -25,13 +31,14 @@ export const Header: React.FC = () => {
           {!isMobile && t("nav.scan")}
         </Link>
         <Link
-          to="/admin/manage-products"
+          to={`/admin${session ? '/manage-products' : ''}`}
           className="flex items-center px-3 py-2 rounded-md text-gray-700 hover:text-blue-600"
         >
           <Settings className={iconSize} />
           {!isMobile && t("nav.admin")}
         </Link>
         <LanguageSelector />
+        {session && <Logout/>}
       </div>
     </div>
   );

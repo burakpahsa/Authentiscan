@@ -1,6 +1,6 @@
 type Props = {
   label: string;
-  type?: "text" | "date" | "url" | "number";
+  type?: "text" | "date" | "url" | "number" | "password";
   value: string;
   required?: boolean;
   children?: React.ReactNode;
