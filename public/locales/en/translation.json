@@ -103,5 +103,12 @@
         "high": "high"
     },
     "confirm": "Confirm",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "logout": "Log Out",
+    "login": {
+        "title": "Admin Login",
+        "email": "Email",
+        "password": "Password",
+        "submit": "Log In"
+    }
 }
