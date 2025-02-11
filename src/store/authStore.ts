@@ -119,7 +119,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
   },
 
   verifyProduct: async (qrCode: string, ipAddress?: string) => {
-    const { data, error } = await supabase.from('products').select().eq('qr_code', qrCode).maybeSingle();
+    const { data, error } = await supabase.rpc('get_product_by_qr', { qr_code_input: qrCode });
     if (error) throw error;
     if (data === null) {
       logRequest(qrCode, false, false, ipAddress)
