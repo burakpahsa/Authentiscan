@@ -119,14 +119,14 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
   },
 
   verifyProduct: async (qrCode: string, ipAddress?: string) => {
-    const { data, error } = await supabase.rpc('get_product_by_qr', { qr_code_input: qrCode });
+    const { data, error } = await supabase.rpc('get_product_by_qr', { qr_code_input: qrCode, ip_address_input: ipAddress });
     if (error) throw error;
     if (data === null) {
-      logRequest(qrCode, false, false, ipAddress)
+      // logRequest(qrCode, false, false, ipAddress)
       return undefined
     }
     if (data) {
-      const isFlagged = await logRequest(qrCode, true, !data.flagged, ipAddress)
+      // const isFlagged = await logRequest(qrCode, true, !data.flagged, ipAddress)
       const product: Product = {
         id: data.id,
         name: data.name,
@@ -136,7 +136,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         qrCode: data.qr_code,
         imageUrl: data.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30',
         bestBefore: data.best_before,
-        isFlagged: data.flagged || isFlagged
+        // isFlagged: data.flagged || isFlagged
+        isFlagged: data.flagged
       }
       return product;
     }

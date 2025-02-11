@@ -9,7 +9,6 @@ type Props = {
 export const ProductResultCard: React.FC<Props> = ({ product }) => {
   const { t } = useTranslation();
 
-  console.log({product})
   return (
     <div className="mt-4">
       <div className="aspect-video rounded-lg overflow-hidden mb-4 shadow-md">
