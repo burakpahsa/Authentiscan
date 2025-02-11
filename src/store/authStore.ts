@@ -1,7 +1,8 @@
 import { create } from 'zustand';
 import { supabase } from '../lib/supabase';
 import { Product, ScanLog } from '../types';
-import { logRequest } from '@helpers/store';
+
+export const THRESHOLD = 3; // Adjust the threshold as needed
 
 interface AuthStore {
   authenticProducts: Product[];
@@ -119,25 +120,22 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
   },
 
   verifyProduct: async (qrCode: string, ipAddress?: string) => {
-    const { data, error } = await supabase.rpc('get_product_by_qr', { qr_code_input: qrCode, ip_address_input: ipAddress });
+    const { data, error } = await supabase.rpc('get_product_by_qr', { qr_code_input: qrCode, ip_address_input: ipAddress, threshold_input: THRESHOLD });
     if (error) throw error;
-    if (data === null) {
-      // logRequest(qrCode, false, false, ipAddress)
+    if (data.length === 0) {
       return undefined
     }
-    if (data) {
-      // const isFlagged = await logRequest(qrCode, true, !data.flagged, ipAddress)
+    if (data[0]) {
       const product: Product = {
-        id: data.id,
-        name: data.name,
-        description: data.description || '',
-        manufacturer: data.manufacturer || '',
-        manufactureDate: data.manufacture_date || '',
-        qrCode: data.qr_code,
-        imageUrl: data.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30',
-        bestBefore: data.best_before,
-        // isFlagged: data.flagged || isFlagged
-        isFlagged: data.flagged
+        id: data[0].id,
+        name: data[0].name,
+        description: data[0].description || '',
+        manufacturer: data[0].manufacturer || '',
+        manufactureDate: data[0].manufacture_date || '',
+        qrCode: data[0].qr_code,
+        imageUrl: data[0].image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30',
+        bestBefore: data[0].best_before,
+        isFlagged: data[0].flagged
       }
       return product;
     }

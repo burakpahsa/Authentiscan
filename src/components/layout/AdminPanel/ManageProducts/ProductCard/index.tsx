@@ -1,9 +1,9 @@
 import { Flag } from "lucide-react";
 import { Product } from "@types";
 import { useTranslation } from "react-i18next";
-import { THRESHOLD } from "@helpers/store";
 import useWindowSize from "@hooks/useWindowSize";
 import { Delete } from "./Delete";
+import { THRESHOLD } from "@/store/authStore";
 
 type ProductCardProps = {
   product: Product;

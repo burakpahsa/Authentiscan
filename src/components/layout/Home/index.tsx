@@ -16,6 +16,7 @@ export const Scanner: React.FC = () => {
 
   const handleScan = async (data: string) => {
     const product = await verifyProduct(data, ipAddress);
+    console.log({product})
     setResult({
       isAuthentic: !!product,
       product,
