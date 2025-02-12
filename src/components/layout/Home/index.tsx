@@ -12,6 +12,7 @@ export const Scanner: React.FC = () => {
   const [result, setResult] = useState<ScanResultType | null>(null);
   const [showScanner, setShowScanner] = useState(false);
   const [ipAddress, setIpAddress] = useState<string>();
+  const [isVerifying, setIsVerifying] = useState(false)
   const verifyProduct = useAuthStore((state) => state.verifyProduct);
 
   const handleScan = async (data: string) => {

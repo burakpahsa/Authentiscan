@@ -1,5 +1,5 @@
 import { FormInput } from "@/components/common/FormInput";
-import { ErrorMessage } from "@/components/common/QRScanner/ErrorMessage";
+import { ErrorMessage } from "@/components/common/ErrorMessage";
 import { supabase } from "@/lib/supabase";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -38,13 +38,13 @@ export const Login: React.FC = () => {
       <div className="mb-8 p-6 bg-white rounded-lg shadow-lg">
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <FormInput
-            label={t('login.email')}
+            label={t("login.email")}
             value={email}
             required
             onChange={(val: string) => setEmail(val)}
           />
           <FormInput
-            label={t('login.password')}
+            label={t("login.password")}
             value={password}
             type="password"
             required
@@ -57,7 +57,7 @@ export const Login: React.FC = () => {
             onClick={login}
             className={`px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors`}
           >
-            {t('login.submit')}
+            {t("login.submit")}
           </button>
         </div>
       </div>

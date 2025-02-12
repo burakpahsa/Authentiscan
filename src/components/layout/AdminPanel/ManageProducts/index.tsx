@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useAuthStore } from "@store/authStore";
-import { AlertCircle, Loader2, Plus } from "lucide-react";
+import { AlertCircle, Plus } from "lucide-react";
 import { AddProduct } from "../AddProduct";
 import { ProductCard } from "./ProductCard";
 import { useTranslation } from "react-i18next";
 import useWindowSize from "@hooks/useWindowSize";
+import { Loader } from "@/components/common/Loader";
 
 export const ManageProducts: React.FC = () => {
   const { t } = useTranslation();
@@ -34,13 +35,15 @@ export const ManageProducts: React.FC = () => {
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className={`flex items-center gap-2 px-4 py-${isSmallMobile ? 3 : 2} bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors`}
+          className={`flex items-center gap-2 px-4 py-${
+            isSmallMobile ? 3 : 2
+          } bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors`}
           style={{
             whiteSpace: "nowrap",
             marginTop: isMobile ? 20 : 0,
             justifySelf: isMobile ? "flex-end" : undefined,
             width: isSmallMobile ? "100%" : undefined,
-            justifyContent: isSmallMobile ? 'center' : undefined
+            justifyContent: isSmallMobile ? "center" : undefined,
           }}
         >
           <Plus className="w-4 h-4" />
@@ -50,11 +53,7 @@ export const ManageProducts: React.FC = () => {
 
       {showForm && <AddProduct setShowForm={setShowForm} />}
 
-      {isLoading && (
-        <div className="flex items-center justify-center py-12">
-          <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
-        </div>
-      )}
+      {isLoading && <Loader />}
 
       {error && (
         <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
