@@ -16,7 +16,7 @@ export const ScannerOverlay: React.FC<ScannerOverlayProps> = ({ onScan }) => {
               onScan(result.getText());
             }
           }}
-          delay={300}
+          delay={100}
           videoConstraints={{ aspectRatio: 3.5, facingMode: 'environment' }}
         />
       </div>
