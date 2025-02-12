@@ -6,16 +6,18 @@ import { QRScanner } from "@common/QRScanner";
 import { useCamera } from "@hooks/useCamera";
 import { ScanResult } from "./ScanResult";
 import { useTranslation } from "react-i18next";
+import { Loader } from "@/components/common/Loader";
 
 export const Scanner: React.FC = () => {
   const { t } = useTranslation();
   const [result, setResult] = useState<ScanResultType | null>(null);
   const [showScanner, setShowScanner] = useState(false);
   const [ipAddress, setIpAddress] = useState<string>();
-  const [isVerifying, setIsVerifying] = useState(false)
+  const [isVerifying, setIsVerifying] = useState(false);
   const verifyProduct = useAuthStore((state) => state.verifyProduct);
 
   const handleScan = async (data: string) => {
+    setIsVerifying(true);
     const product = await verifyProduct(data, ipAddress);
     setResult({
       isAuthentic: !!product,
@@ -28,6 +30,7 @@ export const Scanner: React.FC = () => {
           : t("result.failure"),
     });
     setShowScanner(false);
+    setIsVerifying(false);
   };
 
   const { error, hasPermission, requestPermission } = useCamera();
@@ -84,7 +87,9 @@ export const Scanner: React.FC = () => {
         </button>
       )}
 
-      {showScanner && (
+      {showScanner && isVerifying ? (
+        <Loader />
+      ) : showScanner ? (
         <div className="mb-8">
           <QRScanner
             error={error}
@@ -93,7 +98,7 @@ export const Scanner: React.FC = () => {
             onScan={handleScan}
           />
         </div>
-      )}
+      ) : null}
 
       {result && <ScanResult result={result} handleReset={handleReset} />}
     </div>
